@@ -1,0 +1,955 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--
+  ~ jquery.mb.components
+  ~ Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+  ~ email: mbicocchi@open-lab.com
+  ~ site: http://pupunzi.com
+  ~
+  ~ Licences: MIT, GPL
+  ~ http://www.opensource.org/licenses/mit-license.php
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<html>
+<head>
+  <title>mbContainers</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+ <link rel="stylesheet" type="text/css" href="css/mbContainer.css" title="style"  media="screen"/>
+  <style type="text/css">
+#social-bar { height: 305px; width: 6px; position: fixed; right: 17px; top: 50%; margin-top: -153px; z-index: 1000; }
+#social-bar a { display: block; overflow: hidden; text-indent: -8793px; height: 41px; width: 41px; border: medium none; margin-bottom: 3px; margin-right: -17px; }
+#social-bar #facebook-icon { background: url('images/sprite.png') repeat scroll -6px -78px transparent; }
+#social-bar #twitter-icon { background: url('images/sprite.png') repeat scroll -6px -119px transparent; }
+#social-bar #digg-icon { background: url('images/sprite.png') repeat scroll -6px -160px transparent; }
+#social-bar #delicious-icon { background: url('images/sprite.png') repeat scroll -6px -201px transparent; }
+#social-bar #youtube-icon { background: url('images/sprite.png') repeat scroll -6px -242px transparent; }
+#social-bar #stumble-icon { background: url('images/sprite.png') repeat scroll -6px -283px transparent; }
+#social-bar #rss-icon { background: url('images/sprite.png') repeat scroll -6px -324px transparent; }
+#social-bar #email-icon { background: url('images/sprite.png') repeat scroll -6px -365px transparent; }
+#social-bar #arrange-icon { background: url('images/sprite.png') repeat scroll -6px -406px transparent; }
+#social-bar #home-icon { background: url('images/sprite.png') repeat scroll -6px -447px transparent; }
+#social-bar #s_tooltip {
+	 -moz-border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 1px #AAAAAA 1px 1px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    white-space: nowrap;
+    }
+    
+.blog_column one {
+
+}
+.blog_cloumn two	{
+	
+}
+
+
+#blog_footer {
+  clear: both;
+}
+ 
+ 
+ 
+ 
+
+.media {
+  width:80%;
+  margin:20px auto;
+  height:auto;
+}
+#blog_header,
+#blog_footer {
+  overflow:hidden;
+  zoom:1;
+  background:#9c9965;
+}
+#sidebar {
+  float:left;
+	width:200px;
+}
+.main {
+  float:left;
+  border-right:1px solid #888;
+}
+/* step-1 :: background colors */
+#sidebar {
+	margin-right:-200px;
+	position:relative;/* ie 6 */
+}
+#blog_wrapper {
+	display:inline-block;
+	border-right:200px solid #d4c37b;
+	position:relative; /* ie 6 */
+	  vertical-align:bottom;
+}
+/* step-2 :: killing the gap under #wrapper and creating the vertical border */
+
+#sidebar {
+  margin-left:-1px;
+  border-left:1px solid #888;
+}
+
+#blog_header,
+.main,
+#sidebar,
+#blog_footer {
+  padding-bottom:2em;
+} 
+ #blog_header_bg {
+position : absolute;
+top : 5px;
+left : 0;
+background : transparent url(elements/default/header.png) no-repeat top center;
+width : 100%;
+height : 200px;
+}
+
+#blog_icon {
+position : absolute;
+top : 10px;
+left : 5%;
+background : transparent url(images/apollo_logo_rough.png) no-repeat top left;
+width : 100px;
+height : 100px;
+} 
+
+
+
+</style>
+     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
+     <script type="text/javascript" src="inc/jquery.min.js"></script>
+    <script type="text/javascript" src="inc/jquery.easing.1.3.js"></script>
+   <script type="text/javascript" src="inc/jquery.spasticNav.js"></script>
+   
+    <script type="text/javascript" src="inc/jquery.tooltip.js"></script>
+   
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->
+   <script type="text/javascript" src="inc/jquery.ui.js"></script>
+   
+  <script type="text/javascript" src="inc/jquery.metadata.js"></script>
+  <script type="text/javascript" src="inc/mbContainer.js"></script>
+  
+<script type="text/javascript" src="inc/solar_system.js"></script>
+  
+  
+  
+ <script type="text/javascript" src="inc/jquery.tagsphere.js"></script>
+  <script type="text/javascript" src="inc/jquery.mousewheel.min.js"></script>
+  <script type="text/javascript" src="inc/jquery.mb.mediaEmbedder.js"></script>
+ 
+  
+      <script type="text/javascript">   
+          $(function(){
+      $(".containerPlus").buildContainers({
+        containment:"document",
+        elementsPath:"elements/",
+        onClose:function(o){},
+        onIconize:function(o){},
+        effectDuration:200
+      });
+      });
+      
+      
+      
+      document.containers= new Object();
+      function insertMbContainerPlus(url, containerId, data){
+      if(document.containers[containerId]==1 || !url) return;
+      if(!data) data="";
+      $.ajax({
+        url: url,
+        cache:false,
+        data:data,
+        success: function(html){
+          $("body").append(html);
+          $("#"+containerId).buildContainers({
+            containment:"document",
+            elementsPath:"elements/",
+            effectDuration:200,
+            onLoad:function(o){
+              document.containers[o.attr("id")]=1;
+            },
+            onClose:function(o){
+              o.mb_removeCookie("closed");
+              o.remove();
+              document.containers[o.attr("id")]=null;
+            }
+          });
+        }
+      });
+    }
+      
+      function remove_tagsphere () {
+      var cloud=$.fn.tagcloud;
+      /*
+		$('#y_axis').css({
+  		top: function(index, value) {
+        		return parseFloat(value) +166;
+        		},
+  		left: function(index, value) {
+        		return parseFloat(value) +166;
+  		  		}
+  		});
+  		$('#center_planet').css({
+  		top: function(index, value) {
+        		return parseFloat(value) -166;
+        		},
+  		left: function(index, value) {
+        		return parseFloat(value) -166;
+  		  		}
+  		});*/
+		$('.point').hide();
+	//	$('#blog_planet').unbind('click');
+		remove_moons.appendTo($('#y_axis'));
+		};
+
+      
+      
+            
+     $(document).ready(function(){ 
+     
+    
+ 
+        
+        
+       $('#video_page').mb_embedMovies();
+       $("#video_page").mb_embedAudio();
+     
+        
+      $('#orbit').hide();
+      $('.dock_shelf').hide();
+      $('#orbit_center').hide();
+$('#nav').spasticNav();
+
+$("#information_planet, #info_topmenu").click(function(){
+   if ($('#center_planet').attr('src')== 'images/Blog_2.png'){
+	$('#center_planet').removeAttr('style');
+//$('#y_axis').removeAttr('style');
+$('.point').remove()
+	}
+		if( $('.containerPlus').mb_getState('iconized')!== 'true'){
+		$('.containerPlus').mb_iconizeclose();
+	}
+
+ $('#apollo_system').fadeOut(); 
+ $('.dock_shelf').hide();
+ 
+ $('#orbit').fadeIn();   
+$('#dock_blog').fadeIn();
+ var gallery = "$('#gallery').mb_expand();"
+ var video = "$('#video_page').mb_expand();"
+        
+ var info_moons = '<a id="media_moon1" onclick="'+gallery+'" href="#e?x=250&y=-3&name=jupiter"><img src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3.5em;" /></a>'+
+ '<a id="media_moon2" onclick="'+video+'" href="#f?x=-150&y=-163&name=satur"><img src="images/moon_6.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>';
+// $('#links').detach();		
+ $('#center_planet').attr('src', 'images/Information_2.png'); 
+  $('#moon1_img').attr('src', 'images/moon_2.png');
+ $('#moon2_img').attr('src', 'images/moon_2.png'); 
+ $('#moon1')[0].onclick=function () {
+ $('#video_page').mb_expand();
+ };
+  $('#moon2')[0].onclick=function () {
+ $('#video_page').mb_expand();
+ };
+ //$('#links').append(info_moons); 
+ //$.getScript('inc/solar_system.js');  
+
+});
+ var tag_count = 0;
+ 
+$('#blog_planet, #blog_topmenu').click( function (){
+
+remove_moons=$('#links').detach();
+	
+	if( $('.containerPlus').mb_getState('iconized')!== 'true'){
+		$('.containerPlus').mb_iconizeclose();
+	}
+
+		
+
+  $('#apollo_system').fadeOut();
+  $('#center_planet').hide(); 
+  $('#orbit_center').fadeIn();
+  $('#orbit').fadeIn();
+  
+
+  var video = "$('#video_page').mb_expand();"
+  var blog = "$('#blog_page').mb_expand();"
+        
+  var blog_moons = '<a id="blog_moon1" onclick="'+blog+'" href="#e?x=250&y=-3&name=jupiter"><img src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3.5em;" /></a>'+
+  '<a id="blog_moon2" onclick="'+video+'" href="#f?x=-150&y=-163&name=satur"><img src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>';
+		
+ 
+  
+ 
+     
+  $('.point').fadeIn();
+  
+  
+  
+/*  
+ $('#moon1_img').attr('src', 'images/moon_3.png');
+ $('#moon2_img').attr('src', 'images/moon_3.png'); 
+ console.debug();
+ /*$('#moon1')[0].onclick=function () {
+ $('#blog_page').mb_expand();
+ };
+  */
+}).one('click', function () {
+ var tagsphere = '<ul id="tag_sphere"><li><a href="#" rel="20">Space</a></li><li><a href="#" rel="15">UnIvErSe</a></li><li><a href="#" rel="10">Dr Who</a></li><li><a href="#" rel="5">Star Trek</a></li><li><a href="#" rel="1">Babylon 5</a></li><li><a href="#" rel="5">ZoRRo</a></li></ul>'
+/*
+$('#center_planet').css({
+  top: function(index, value) {
+        return parseFloat(value) +166;
+        },
+  left: function(index, value) {
+        return parseFloat(value) +166;
+  		  }
+  });*/
+/*  $('#y_axis').css({
+  top: function(index, value) {
+        return parseFloat(value) -166;
+        },
+  left: function(index, value) {
+        return parseFloat(value) -166;
+  		  }
+  });*/
+  
+
+  
+  $('#orbit_center').append(tagsphere).tagcloud({centrex:166, centrey:166});
+
+  });
+
+
+
+
+
+$('#media_planet, #media_topmenu').click(function (){
+  if ($('#center_planet').attr('src')== 'images/Blog_2.png'){
+//	remove_moons.appendTo($('#y_axis'));
+//$('#y_axis').removeAttr('style');.css({'top':'-166px', 'left' : '-166px'})
+
+	}
+	if( $('.containerPlus').mb_getState('iconized')!== 'true'){
+		$('.containerPlus').mb_iconizeclose();
+	}
+
+	
+  $('#apollo_system').fadeOut();
+   $('.dock_shelf').hide();
+   $('#orbit_center').hide();
+   $('#dock_media').fadeIn();
+   $('#center_planet').fadeIn();
+   $('#orbit').fadeIn();
+  remove_tagsphere();
+  
+  var gallery = "$('#gallery_page').mb_expand();"
+  var video = "$('#video_page').mb_expand();"
+        
+  var media_moons = '<a id="media_moon1" onclick="'+gallery+'" href="#e?x=250&y=-3&name=jupiter"><img src="images/moon_2.png" style="position:absolute;top:-20px;left:-20px;width:3.5em;" /></a>'+
+  '<a id="media_moon2" onclick="'+video+'" href="#f?x=-150&y=-163&name=satur"><img src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>';
+		
+  $('#center_planet').attr('src', 'images/Media_2.png');
+  
+ $('#moon1_img').attr('src', 'images/moon_3.png');
+ $('#moon2_img').attr('src', 'images/moon_3.png'); 
+ $('#moon1')[0].onclick=function () {
+ $('#video_page').mb_expand();
+ };
+ $('#moon2')[0].onclick=function () {
+ $('#gallery_page').mb_expand();
+ };
+ // $('#links').append(media_moons);
+    	 	
+  //$.getScript('inc/solar_system.js');
+    
+}); 
+
+$('#about_planet, #about_topmenu').click(function (){
+  if ($('#center_planet').attr('src')== 'images/Blog_2.png'){
+	$('#center_planet').removeAttr('style');
+//$('#y_axis').removeAttr('style');
+$('.point').remove()
+	}
+		if( $('.containerPlus').mb_getState('iconized')!== 'true'){
+		$('.containerPlus').mb_iconizeclose();
+	}
+	
+  $('#apollo_system').fadeOut(); $('#orbit').fadeIn();
+  
+  
+  var gallery = "$('#gallery_page').mb_expand();"
+  var video = "$('#video_page').mb_expand();"
+        
+  var about_moons = '<a id="media_moon1" onclick="'+gallery+'" href="#e?x=250&y=-3&name=jupiter"><img src="images/moon_2.png" style="position:absolute;top:-20px;left:-20px;width:3.5em;" /></a>'+
+  '<a id="media_moon2" onclick="'+video+'" href="#f?x=-150&y=-163&name=satur"><img src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>';
+		
+  $('#moon1_img').attr('src', 'images/moon_6.png');
+ $('#moon2_img').attr('src', 'images/moon_6.png'); 
+ 
+  $('#center_planet').attr('src', 'images/About_2.png');
+   $('#moon1')[0].onclick=function () {
+ $('#gallery_page').mb_expand();
+ };
+ 
+  //$('#links').append(about_moons);
+    	 	
+// $.getScript('inc/solar_system.js');
+    
+});  
+
+
+$ ('#home-icon, #apollo_logo').click(function (){
+	if( $('.containerPlus').mb_getState('iconized')!== 'true'){
+		$('.containerPlus').mb_iconizeclose();
+	}
+	if ($('#center_planet').attr('src')== 'images/Blog_2.png'){
+	$('#center_planet').removeAttr('style');
+//$('#y_axis').removeAttr('style');
+$('.point').remove()
+	}
+	$('#orbit').fadeOut();
+	$('#apollo_system').fadeIn();
+});
+
+
+$('a.tooltip').tooltip({
+rounded:true
+});
+
+
+
+
+
+
+});
+
+
+    </script>
+ 
+
+<script type="text/javascript"> 
+window.onload=function (){
+text_clear();
+var bgFolder = 'images/';
+//alert('screen width is '+screen.width+'. screen height is '+screen.height );
+if (screen.width>=1920){
+ document['body'].style.backgroundImage='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1600){
+ document['body'].style.background='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1440){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1440x810.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1280){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1280x800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1152){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1152x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1024){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+// Optional
+/* else if (screen.width>=800){
+ document['body'].style.background='url('+bgFolder+'bg800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+} */
+else if (screen.width<=799){
+document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout.jpg)';
+document['body'].style.backgroundRepeat='repeat';
+}
+else {
+ document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+
+}
+  </script>
+ 
+  <script type="text/javascript">
+
+      
+      
+      
+
+      if (!$("#demoContainer").mb_getState("closed")){
+        $('#close').fadeIn();$('#actions').fadeIn(); $("#open").hide(); $('#open_change').hide();
+      }
+
+  </script>
+
+  <script language="Javascript" type="text/javascript">
+$(document).ready(function(){
+
+	// Social Bar Hover Effect
+	$('#social-bar a').hover(function() {
+		$(this).stop().animate({'margin-left' : '-18px'}, 200);
+	}, function(){
+		$(this).stop().animate({'margin-left' : '0'}, 200);
+	});
+
+	// Social Bar Tooltips
+	$("#social-bar a").hover(function(e) {
+		var y = $(this).offset().top - $("#social-bar").offset().top;
+		var content = $(this).attr('title');
+		var id = $(this).attr('id');
+
+		$(this).attr('title', '');
+
+		$("#social-bar").append("<div id='s_tooltip'>" + content + "</div>");
+		$("#social-bar #s_tooltip").css('opacity', 0.7).css('top', y + 8).css("right", 50).data('trigger', id).fadeIn();
+	},
+		function() {
+			var trigger = $("#social-bar #s_tooltip").data('trigger');
+			var content = $("#social-bar #s_tooltip").html();
+			$('#' + trigger).attr('title', content);
+			$("#social-bar #s_tooltip").remove();
+		}
+	);
+
+ 
+
+
+
+});	
+
+	
+		/* show - hide */
+	
+	    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+</script>
+<script language="javascript" type="text/javascript">   
+   
+  letters= 
+ '<p align="lef"><font size="2" face="Courier New">Connecting , Please Wait . . . . . . . . . . . . .  </font></p>'+'   <br>'+'        <br>'+
+
+'<p align="center"><font size="3" face="Courier New">start. . .               <br>           '+
+
+'<br>           '+
+
+'Welcome starfarer, you have reached the Apollo System <br>'+
+
+'                    <br>'+
+
+'-----------Scanning for life readings-----------               <br>           '+
+
+'<br>'+
+
+'Decting interference............................'+
+
+'                    <br>'+
+
+'   <br>'+
+
+' <br>'+
+
+'MAYDAY!!!! MAYDAY!!!! ONCOMING MISSILE<br>'+
+
+'   <br>'+
+
+'<br>'+
+
+'                    <br>'+
+
+'SUGGEST EVASIVE MANEUVERS   <br>'
+
+line=0
+
+cursor='&#x2588;'
+
+function text_clear(){
+
+if(line==letters.length) cursor=''
+
+document.getElementById('textfloat').innerHTML=letters.substring(0,line)+cursor
+
+if(line++<letters.length) setTimeout("text_clear()",30) 
+
+}
+
+    
+</script>
+
+</head>
+<body >
+
+<div id="container">
+
+<div id="wrapper">
+
+<div id="header">
+
+<a id="apollo_logo" href="#"><img src="images/apollo_logo_rough.png" height="120px" /></a>
+
+    <ul id="nav">
+        <li id="selected"><a id="info_topmenu"Info href="#">Info</a></li>
+        <li><a id="blog_topmenu" href="#">Blog</a></li>
+        <li><a id="media_topmenu" href="#">Media</a></li>
+        <li><a id="about_topmenu" href="#">About</a></li>
+        
+    </ul>
+   
+</div>
+
+
+
+<div id="space">
+
+
+<ul id="apollo_system">
+<li><a id="information_planet" class="tooltip" href="#" style="display:block;" title="HERICUS || INFORMATION Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum scelerisque urna, vitae pretium odio luctus quis. Aenean scelerisque diam eu enim feugiat laoreet. "><img src="images/Information_2.png" width="333px" style="top:230px; left:20px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="blog_planet" class="tooltip" href="#" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/Blog_2.png" width="133px" style="top:10px; left:220px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="media_planet" class="tooltip" href="#" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/Media_2.png" width="233px" style="top:200px; left:700px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="about_planet" class="tooltip" href="#" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/About_2.png" width="80px" style="top:30px; left:900px; position: absolute; z-index: 10;" /></a></li>
+</ul>
+
+        <div id = "orbit" style="width:718px; height:501px; background: url(images/overlay.png) no-repeat; background-color: rgba(0,0,0,0.4);border:1px solid #96bfe5;-moz-border-radius: 24px;
+    -webkit-border-radius: 24px; margin:auto; z-index:20;"> 
+    
+        <div id="dock" class="dock_shelf"> </div><div id="dock_media" class="dock_shelf"> </div><div id="dock_blog" class="dock_shelf"> </div>
+        
+<div id="orbit_center" style="top:72px; left: 210px"><img id="center_planet_blog" src="images/Blog_2.png" width="332px" style="position:absolute; z-index:400;"/>
+<!--top:50px; left:359px;-->
+</div>
+<div id="x_axis">
+   <div id="y_axis"><img id="center_planet" src="images/Information_2.png" width="332px" style="position:absolute; top:-166px; left:-166px; z-index:401;"/>
+      <div id="links">
+      	
+      	<a id="moon1" onclick="$('#gallery_page').mb_expand();" href="#e?x=250&y=-3&name=jupiter"><img id="moon1_img" src="images/moon_2.png" style="position:absolute;top:-100px;left:-20px;width:3.5em;" /></a>
+    	 	<a id="moon2" onclick="$('#video_page').mb_expand();" href="#f?x=-150&y=-163&name=satur"><img id="moon2_img" src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>
+      	<!--<a id="moon3" onclick="$('#gallery_page').mb_expand();" href="#g?x=-180&y=223&name=uranus"><img id="moon3_img" src="images/moon_3.png" style="position:absolute;top:-20px;left:-20px;width:2.5em;" /></a>
+      	<a id="moon4" href="#g?x=-260&y=43&name=neptune"><img id="moon4_img"src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:1em;" /></a>
+      -->
+      </div>
+  </div> 
+</div>   
+        </div>
+<div class=themessage id=textfloat ?></div>
+</div>
+
+<div id="content" style="color:#fff; font-size: 1em;">
+<a href="#" id="ajax2Opener" onclick="insertMbContainerPlus('ajax2.html','ajax2', '');">HELLLLLOOOOO</a>
+  <button class="button" id="ajax2Opener" onclick="insertMbContainerPlus('ajax2.html','ajax2', '');">open container 2</button>
+</div>
+
+  <div id="gallery_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'browser.png', skin:'white', width:'800',iconized:'true', dock:'dock_media', title:'Image Archives'}" style="position:fixed;top:100px;left:400px">
+    <script type="text/javascript">  
+ $(document).ready(function(){
+
+	var shiftSpeed = 1500;
+
+	var bigSlideWidth = 600;
+	var bigSlideHeight = 400;
+	var smallSlideWidth = 500;
+	var smallSlideHeight = 300;
+	var tinySlideWidth = 400;
+	var tinySlideHeight = 200;
+	var columnCount = 4;
+	var rowCount = 4;
+	
+
+	function shiftBoxes(boxN) {
+		var col = ( (boxN) % rowCount ) * -1;
+		var row = Math.floor( (boxN) / columnCount ) * -1;
+		$("#big-panel").stop().animate({ left: bigSlideWidth * col, top: bigSlideHeight * row }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#small-panel").stop().animate({ left: smallSlideWidth * col +50, top: smallSlideHeight * row +50 }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#tiny-panel").stop().animate({ left: tinySlideWidth * col +100, top: tinySlideHeight * row +100 }, shiftSpeed, "easeInOutCubic"  ); 
+	}  
+
+	$("ul#console li a").click( function() { 
+		consoleIndex = $("ul#console li a").index(this);
+		shiftBoxes( consoleIndex  ); 
+	});
+
+
+$(function($) {
+    $('div.slide-wrap').each(function() {
+        var oheight = 320;
+        var owidth = 520;
+        var nheight = 140;
+        var nwidth = 340;
+        var top = ((oheight - nheight) / 2);
+        var left = ((owidth - nwidth) / 2);
+        
+       $(this).children(0).stop().css({'height':nheight+'px', 'width': nwidth+'px', 'padding-left':'90px',
+            		  'padding-top':'90px' });
+ 		
+ 
+        $(this).mouseleave(function() {
+   			
+            $(this).children(0).stop().animate({
+            		  'padding-left':'90px',
+            		  'padding-top':'90px',
+                    'height' : nheight+'px',
+                    'width' : nwidth+'px',
+                    }, 210);
+     
+        });
+ 
+        $(this).mouseenter(function() {
+            $(this).children(0).stop().animate({
+                   'padding-left':'0px',
+            		  'padding-top':'0px',
+                    'height' : oheight+'px',
+                    'width' : owidth+'px'}, 150, function() {
+                        $(this).css('height', oheight+'px').parent();
+                    });
+        	
+        });
+
+    });
+});
+	
+	
+
+});
+</script>
+    
+    
+    <div id="viewport">
+
+	<div id="enclosure">
+
+		<div id="tiny-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+		</div> 
+
+	
+		<div id="small-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div>   
+		</div> 
+
+		<div id="big-panel">
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div>
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+		</div> 
+	
+	
+
+	</div>  
+	
+	<ul id="console">
+		<li><a href="#1"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#2"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#3"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#4"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#5">5</a></li>
+		<li><a href="#6">6</a></li>
+		<li><a href="#7">7</a></li>
+		<li><a href="#8">8</a></li>
+		<li><a href="#9">9</a></li>
+		<li><a href="#10">10</a></li>
+		<li><a href="#11">11</a></li>
+		<li><a href="#12">12</a></li>
+		<li><a href="#13">13</a></li>
+		<li><a href="#14">14</a></li>
+		<li><a href="#15">15</a></li>
+		<li><a href="#16">16</a></li>
+	</ul>
+   
+</div>
+    <div class="evidence">
+    <a href="#" class="zoom"><img src="images/window_image.jpg" width="340px" height="140px"></a>
+      <h3>And this can be drag with a 100 X 100 grid!</h3>
+      <p>to preiconize containers just add the param <span style="font-weight: bold;">iconized:'true'</span></p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+<div id="video_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'moonov_03.png', skin:'white', width:'800',dock:'dock_media',iconized:'true', title:'Recordings'}" style="position:fixed;top:200px;left:200px">  
+
+  
+  [youtube=http://www.youtube.com/watch?v=1fLCbw27F-8]
+  
+  
+  
+</div>  
+
+<div id="blog_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'moonov_01.png', skin:'white', width:'800', minWidth:'630', dock:'dock_blog',iconized:'true', title:'Blog'}" style="position:fixed;top:300px;left:100px">  
+  
+<!--
+<div style="min-width:510px; margin: 0 auto;">
+<div id="blog_header">Header</div>
+<div id="blog_column one" style="border: 1px solid #c2efeb; width:70%; float: left;">
+Column 1
+<p>
+Quisque quis magna blandit nibh lacinia suscipit. Praesent venenatis tempus urna, vel varius elit varius eget. Morbi vitae nisi diam? Nunc lectus sem, adipiscing sit amet feugiat vel, blandit at mi. Fusce tempor felis sed risus elementum vel suscipit tortor accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Vivamus quis feugiat nibh. Phasellus auctor urna vitae urna suscipit viverra. Nam mi nisi; varius non commodo nec, suscipit ac sem. Donec sem felis, elementum consectetur vehicula vitae, mattis bibendum nulla. Donec semper, mi eu ornare gravida, risus lectus adipiscing nisl, quis consectetur quam dui vitae lectus. Quisque libero leo, ullamcorper ac volutpat et, porttitor nec mauris. Suspendisse eget orci in felis volutpat commodo a vel lorem? Cras non urna non quam commodo ornare et quis sem! Vestibulum varius luctus nunc ut ullamcorper.
+</p>
+
+<p>
+Donec accumsan felis ligula. Suspendisse potenti. Donec ut massa ac eros condimentum volutpat in in purus. Morbi nunc est, accumsan sed tincidunt sit amet; ornare id urna! Mauris aliquet tellus vel ligula laoreet molestie. Duis nec lacus a orci consectetur gravida vitae eu sem. Fusce sed dui quis justo rhoncus lobortis. Proin vulputate tortor quis diam pellentesque aliquam. Praesent purus orci, rhoncus at imperdiet a, tristique vel nunc. Nunc ut velit mi, a blandit dui. Curabitur risus eros, aliquet eget viverra ac, varius a lectus? In hac habitasse platea dictumst. Ut porttitor ligula et nibh lacinia tempus. Donec enim nisi, aliquam sed condimentum ut, congue id ante.
+</p>
+
+<p>
+Etiam venenatis, elit ac cursus euismod, lectus turpis placerat risus, ornare pulvinar justo ligula et diam. Pellentesque ullamcorper urna ut lacus scelerisque sollicitudin. Suspendisse vitae elementum lorem. Donec venenatis iaculis tempor. Nam vitae tortor aliquam turpis ultricies placerat nec sed mauris? Nunc dui lorem; feugiat et blandit et; posuere non elit. Vestibulum sapien turpis, molestie ultrices ultricies nec, dapibus in purus. Nullam dictum rhoncus lectus eu ullamcorper. Pellentesque pharetra diam a est ullamcorper a sodales orci vulputate. Donec quis sem at neque pretium porta. Quisque malesuada feugiat nisl, at consectetur felis egestas at. Sed nec arcu vitae quam tincidunt fermentum vitae quis tortor. Suspendisse enim nisl; facilisis et ornare at, sodales id nisl. Morbi sollicitudin tellus vel dolor eleifend et tincidunt neque elementum. Nullam eget libero sem. Sed at fringilla arcu. Pellentesque et posuere sapien.
+</p>
+</div>
+<div class="blog_column two" style="border: 1px solid #c2efeb;width:200px;float: right;">
+Column 3
+</div>
+<div id="blog_footer">Footer</div>
+</div>
+-->
+  
+<div id="blog_header">
+<h2><a href="#">Header</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+</div>
+<div id="blog_wrapper">
+
+<div class="main">
+<h2><a href="#" id="ajax2Opener" onclick="insertMbContainerPlus('ajax2.html','ajax2', '');">Main</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+</div>
+<div id="sidebar">
+<h2><a href="#">Sidebar</a></h2>
+&#9660;&#160;
+<br/>
+&#9658;&#160; 
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus.</p> 
+<p>Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+</div>
+
+<div class="main">
+<h2><a href="#" id="ajax1Opener" onclick="insertMbContainerPlus('ajax1.html','ajax1', '');">Main</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+</div>
+</div>
+<div id="blog_footer">
+<h2><a href="#">Footer</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+</div>
+<div id="blog_header_bg"><span></span></div>
+<div id="blog_icon"><span></span></div>
+</div>      
+  
+  
+  <div class="containerPlus draggable resizable {buttons:'m,i,c', icon:'alert.png', skin:'white', width:'500', content:'test.html',dock:'dock',iconized:'true', title:'Ajax content!'}" style="top:100px;left:500px">
+    <h3>Attenzione!</h3>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'white', width:'100%',iconized:'true',dock:'dock',title:'Container width 100%'}" >
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'default', width:'500', height:'300', handles:'s,e,se', aspectRatio:true, iconized:'true',dock:'dock',title:'resizable container with aspectRatio active'}">
+    <div class="evidence">
+      <h3>This container resizes maintaining the aspectRatio!</h3>
+      <p>This is a contextualized container and can be resized only vertically;</p>
+      <p>it has a width and a height defined;</p>
+      <p>can be collapsed and can be closed;</p>
+      <p>it has the "default" skin;</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+
+  <div id="demoContainer" class="containerPlus draggable resizable {buttons:'m', icon:'chart.png', skin:'black', width:'500',dock:'dock',closed:'true', rememberMe:true,title:'container Demo'}" style="position:absolute;top:250px;left:400px; height:50%">
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+ <!-- 
+  <div id="footer">
+
+</div>
+ --> 
+  
+</div>
+
+</div>
+<div id="social-bar">
+	<a id="facebook-icon" href="#" title="Share us on Facebook" class="pngfix">Share on Facebook</a>
+	<a id="twitter-icon" href="#" title="Share us on Twitter" class="pngfix">Share on Twitter</a>
+	<a id="digg-icon" href="#" title="Digg us" class="pngfix">Digg us</a>
+	<a id="delicious-icon" href="#" title="Save on del.icio.us" class="pngfix">Save on del.icio.us</a>
+	<a id="stumble-icon" href="#" title="Stumble us" class="pngfix">Stumble us</a>
+	<a id="rss-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+	<a id="email-icon" href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	<a id="arrange-icon" href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	<a id="home-icon"  href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	
+	<button id="open" onclick="$('.containerPlus').mb_open();">open closed containers </button>
+	
+	<button id="center" onclick="$('#overlay5').mb_resizeTo(600,600);$('#overlay3').mb_resizeTo(600,600);$('#overlay4').mb_resizeTo(600,600);$('#overlay5').mb_setPosition(200,140);$('#overlay3').mb_setPosition(100,140);$('#overlay4').mb_setPosition(150,140);$('#overlay5').mb_toggle();$('#overlay3').mb_toggle();$('#overlay4').mb_toggle();">center on window</button>
+	
+	
+	<!--<div id="dock"> </div><div style="clear:both;"></div>-->
+</div>
+
+</body>
+</html>

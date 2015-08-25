@@ -1,0 +1,1152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--
+  ~ jquery.mb.components
+  ~ Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+  ~ email: mbicocchi@open-lab.com
+  ~ site: http://pupunzi.com
+  ~
+  ~ Licences: MIT, GPL
+  ~ http://www.opensource.org/licenses/mit-license.php
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<html>
+<head>
+  <title>mbContainers</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+ <link rel="stylesheet" type="text/css" href="css/mbContainer.css" title="style"  media="screen"/>
+  <style type="text/css">
+
+#rightsidebar #s_tooltip {
+	 -moz-border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 1px #AAAAAA 1px 1px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    white-space: nowrap;
+    }
+ 
+ 
+  #rightsidebar { height: 202px; width: 50px; position: fixed; right: -1px; top: 50%; margin-top: -133px; z-index: 1000; }
+ #rightsidebar_1 { height: 250px; width: 33px; position: fixed; right: 120px; top: 50%; margin-top: -48px; z-index: 1000; }
+#rightsidebar a { display: block; overflow: hidden; text-indent: -8793px; height: 67px; width: 50px; border: none; margin-bottom: 0px; margin-right: -17px;}
+#rightsidebar_1 a { display: block; overflow: hidden; text-indent: -8793px; height: 32px; width: 31px; border: none; margin-bottom: 0px; margin-right: -17px; }
+#rightsidebar_1 #facebook-icon { background: url('images/dock.png') repeat scroll 0px -209px transparent;}
+#rightsidebar_1 #twitter-icon { background: url('images/dock.png') repeat scroll 0px -243px transparent; }
+#rightsidebar_1 #delicious-icon { background: url('images/dock.png') repeat scroll 0px -277px transparent; }
+#rightsidebar_1 #digg-icon { background: url('images/dock.png') repeat scroll 0px -311px transparent; }
+#rightsidebar_1 #youtube-icon { background: url('images/dock.png') repeat scroll 0px -344px transparent; }
+#rightsidebar_1 #stumble-icon { background: url('images/dock.png') repeat scroll 0px -378px transparent; }
+#rightsidebar_1 #rss-icon { background: url('images/dock.png') repeat scroll 0px -412px transparent; }
+
+#rightsidebar #arrange-icon { background: url('images/dock.png') repeat scroll 0px -2px  transparent; }
+#rightsidebar #home-icon { background: url('images/dock.png') repeat scroll 0px -69px transparent;}
+#rightsidebar #email-icon { background: url('images/dock.png') repeat scroll 0px -136px  transparent; }
+  
+.rightsidebar-icon {
+ 	position:absolute;
+ }
+ 
+.blog_column one {
+
+}
+.blog_cloumn two	{
+	
+}
+
+
+#blog_footer {
+  clear: both;
+}
+
+.media {
+  width:80%;
+  margin:20px auto;
+  height:auto;
+}
+#blog_header,
+#blog_footer {
+  overflow:hidden;
+  zoom:1;
+  background:#9c9965;
+}
+
+.main {
+
+  
+}
+/* step-1 :: background colors */
+
+#blog_wrapper {
+	  vertical-align:bottom;
+	  overflow:hidden;
+}
+/* step-2 :: killing the gap under #wrapper and creating the vertical border */
+#blog_wrap {
+	  vertical-align:bottom;
+	  overflow:hidden;
+	 padding:9px 0 0 0; 
+}
+
+#blog_header,
+.main,
+
+#blog_footer {
+  padding-bottom:2em;
+} 
+ #blog_header_bg {
+position : absolute;
+top : 5px;
+left : 0;
+background : transparent url(elements/default/header.png) no-repeat top center;
+width : 100%;
+height : 200px;
+}
+
+#blog_icon {
+position : absolute;
+top : 10px;
+left : 5%;
+background : transparent url(images/apollo_logo_rough.png) no-repeat top left;
+width : 100px;
+height : 100px;
+} 
+
+
+.pikachoose { }
+
+.pika-image {border:#96bfe5 solid 1px; position: relative; height: 200px; width: 318px; /*border:#fff solid 1px;*/}
+    /*position image holders */
+    .pika-image .animation, .pika-image .main-image {position: absolute; top: 0px; left: 0px;}
+    .pika-image .animation {display: none;z-index:2;}
+    .pika-image img {border:0;}
+
+.pika-imgnav{display:none;}
+.pika-textnav {display:none;}
+
+.pika-thumbs {position:relative; overflow: hidden; z-index:3; /*border:#fff solid 1px;*/}
+    .pika-thumbs li {position:relative;float: left; list-style-type: none; width: 10px;cursor: pointer;}
+        .pika-thumbs li .clip { position:relative;width: 10px; height: 10px; text-align: center; vertical-align: center; overflow: visible;}
+
+
+
+
+
+ul#pikame li{margin-left:10px; }
+
+.pika-image .caption {background:#141414; position: absolute;   font-size: 11px; color: #fafafa; padding: 10px; text-align: left; bottom: 0px; }
+	.pika-image .caption p {padding: 0; margin: 0; line-height: 14px;}
+
+
+
+	
+	  div.float {
+  float: left;
+  padding: 10px 10px 10px 10px;
+  }
+  
+div.float p {
+   text-align: center;
+   }
+
+
+</style>
+
+  
+<script type="text/javascript">
+var moon_id=1, menu_item, moon_image, num_moons, open_window = new Array(num_moons), total_num_moons, prev_moon_num=0; 
+var image_path, that_image;   
+$(function(){
+	$(".containerPlus").buildContainers({
+  	containment:"document",
+  	elementsPath:"elements/",
+  	onClose:function(o){},
+  	onIconize:function(o){},
+  	effectDuration:200
+	});
+});
+            
+document.containers= new Object();
+function insertMbContainerPlus(url, containerId, data){
+if(document.containers[containerId]==1 || !url) return;
+if(!data) data="";
+$.ajax({
+  url: url,
+  cache:false,
+  data:data,
+  success: function(html){
+	 $("body").append(html);
+	 $("#"+containerId).buildContainers({
+		containment:"document",
+		elementsPath:"elements/",
+		effectDuration:200,
+		onLoad:function(o){
+		  document.containers[o.attr("id")]=1;
+		},
+		onClose:function(o){
+		  o.mb_removeCookie("closed");
+		  o.remove();
+		  document.containers[o.attr("id")]=null;
+		}
+	 });
+  }
+});
+}     
+
+function moons_setup (){
+	total_num_moons=$('#links a').length;
+	if (total_num_moons > num_moons){
+		for (moon_id;moon_id<=total_num_moons;moon_id++){
+			$('#moon'+moon_id).hide();
+		};		
+	}
+};
+
+function setup () {
+	$('.dock_shelf, #center_planet').hide();
+	if ($('#orbit_center').css('display')!== 'none'){
+		$('#orbit_center').hide();
+		$('.point').hide();
+		remove_moons.appendTo($('#y_axis'));
+		remove_moons=undefined;
+	} 
+	moon_id = 1; 
+};
+ 
+function clear_windows () {
+	var iconized;
+	var close;
+	$('.containerPlus').each( function () {
+		iconized=$(this).mb_getState('iconized')
+		close=$(this).mb_getState('closed')
+		var window_width = $(this).attr('width');
+		if(close == false && iconized == false){
+		var has_class=$(this).hasClass('createwindow')
+			if (has_class == false){
+				$(this).mb_resizeTo(400, window_width).mb_iconizeclose().mb_resizeTo(400, window_width);			
+				if ($(this).mb_getState('collapsed')==true){
+					$(this).containerCollapse();
+				}
+			}
+			else {
+		//	var window_width = $(this).attr('width');	
+			$('#blog_console').mb_close();
+			$('#player_window').mb_close();
+			$('#image_window').mb_close();
+			//$(this).mb_resizeTo(400, 800);
+				if ($(this).mb_getState('collapsed')==true){
+					$(this).containerCollapse();
+				}
+			}
+		}
+	}); 
+};
+
+     var scrolling = null;
+  
+     function scroll_up() {
+        var d = document.getElementById('list');
+  
+         d.scrollTop = d.scrollTop - 1;
+  
+         scrolling = window.setTimeout(function() {
+             scroll_up();
+        }, 10);
+     }
+  
+     function scroll_down() {
+         var d = document.getElementById('list');
+  
+         d.scrollTop = d.scrollTop + 1;
+  
+        scrolling = window.setTimeout(function() {
+             scroll_down();
+         }, 10);
+     }
+  
+     function stop_scroll() {
+         window.clearTimeout(scrolling);
+     }
+
+var line=0;
+start=0;
+var cursor = '&#x2588;'
+	var des; 	
+var timeout;
+var t;
+function text_clear(){
+
+	if(line==des.length){
+		cursor=' &#x2588;';
+	}
+	document.getElementById('tooltip').innerHTML=des.substring(start,line)+cursor
+	if(line++<des.length){
+		setTimeout("text_clear()",30);
+	} 
+	else {
+		line=0;
+		start=0;
+	}
+}
+
+$(document).ready(function(){   
+$('#orbit, #orbit_center, .dock_shelf').hide();
+   $('#nav').spasticNav();   
+	$('a.tooltip').tooltip();
+	$("#pikame").PikaChoose();
+ 
+$(window).load(function(){
+/*	$(document).bind("contextmenu",function(e){
+    	return false;
+	});
+*/	
+/*
+$('#big-panel a').click (function () {
+
+image_path = "'images/windows_information.jpg'";
+$('#image').attr('src', image_path);
+alert(image_path);
+$('#image_window').mb_expand();
+});
+*/	/*
+$('#big-panel img').click (function () {
+$('#image_window .mbcontainercontent').empty();
+$(this).clone(false).appendTo('#image_window .mbcontainercontent');
+$('#image_window').mb_expand();
+});*/
+
+$('#big-panel img').click (function () {
+	var image_clone;
+	image_clone = $(this).clone().removeAttr('style')
+	$('#image_window .mbcontainercontent img').replaceWith(image_clone);
+	$('#image_window').mb_open();
+});
+
+$("#video_page a").click( function () {
+	var video_link;
+	video_link=$(this).attr('video');
+	$('#player_window .mbcontainercontent').html(video_link);
+	$('#player_window').mb_embedMovies();
+	$('#player_window').mb_open();
+});
+
+// CLICKSSSSSSSSSSSS
+$("#information_planet, #info_topmenu").click(function(){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() { 
+		num_moons=4;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_4.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				case 2:
+				moon_image = 'images/moon_2.png';
+				open_window[moon_id] = 'blog_page';
+				break;
+				case 3:
+				moon_image = 'images/moon_1.png';
+				open_window[moon_id] = 'gallery_page';
+				break;
+				case 4:
+				moon_image = 'images/moon_3.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/Information_2.png').show();  
+		$('#orbit, #dock_info').fadeIn(); 
+	}, 500);
+	$('#apollo_system').fadeOut('500')
+});
+ 
+$('#blog_planet, #blog_topmenu').click( function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	$('.dock_shelf').hide();
+	setTimeout(function() { 
+		if (typeof remove_moons == 'undefined'){
+			remove_moons=$('#links').detach();
+		}
+		$('#center_planet, #orbit').hide(); 	  
+  		$('#orbit_center, .point, #orbit').fadeIn();
+  		$('#blog_console').mb_open();
+  	}, 500); 	
+  	$('#apollo_system').fadeOut('500');
+}).one('click', function () {
+	var tagsphere = '<ul id="tag_sphere"><li><a href="#" rel="20" title="space">Space</a></li><li><a href="#" rel="15" title="universe">UnIvErSe</a></li><li><a href="#" rel="10" title="dr who">Dr Who</a></li><li><a href="#" rel="5">Star Trek</a></li><li><a href="#" rel="1">Babylon 5</a></li><li><a href="#" rel="5">ZoRRo</a></li></ul>'	
+	$('#orbit_center').append(tagsphere).tagcloud({centrex:166, centrey:166});
+});
+
+$('#media_planet, #media_topmenu').click(function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() {          
+		num_moons=2;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_6.png';
+				open_window[moon_id] = 'gallery_page';
+				break;
+				case 2:
+				moon_image = 'images/moon_3.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/Media_2.png').show();  
+		$('#orbit, #dock_media').fadeIn(); 
+	}, 500);         
+	$('#apollo_system').fadeOut('500')	      
+}); 
+
+$('#about_planet, #about_topmenu').click(function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() { 
+		num_moons=1;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_1.png';
+				open_window[moon_id] = 'blog_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/About_2.png').show();  
+		$('#orbit, #dock_about').fadeIn(); 
+	}, 500);
+	$('#apollo_system').fadeOut('500');
+});  
+
+
+$ ('#home-icon, #apollo_logo').click(function (){
+	clear_windows ();
+	$('#orbit').hide();
+	$('#apollo_system').fadeIn(800);
+});
+
+$('#arrange-icon').toggle(function () {
+	var y_count = 100;
+	var close, iconize, collapsed;
+	$('.containerPlus').each( function () {
+	if ($(this).hasClass('alone') == false){
+	iconized=$(this).mb_getState('iconized')
+	close=$(this).mb_getState('closed')
+	if(close == false && iconized == false){
+		collapsed=$(this).mb_getState('collapsed');
+		if (collapsed == false){
+			$(this).containerCollapse().mb_resizeTo(400, 300);
+			$(this).mb_setPosition(y_count,y_count);
+			y_count=y_count+50;
+		}
+	}
+	}
+	});
+	}, function () {
+	var y_count = 100;
+	var x_count = 50;
+	var minimized = null;
+	var collapsed = null;
+		$('.containerPlus').each(function () {
+		minimized=$(this).mb_getState('restored')
+		if ( minimized == true){
+			collapsed=$(this).mb_getState('collapsed');
+			if (collapsed == true){
+				$(this).mb_setPosition(y_count,x_count).mb_resizeTo(200, 600);
+				$(this).containerCollapse();
+				y_count = y_count+100;
+				x_count = x_count + 100;
+			}
+		}
+		});		
+	});
+//		  .containerCollapse().mb_resizeTo(400, 300)
+
+});
+});
+    </script>
+ 
+
+<script type="text/javascript"> 
+window.onload=function (){
+//text_clear();
+
+var bgFolder = 'images/';
+//alert('screen width is '+screen.width+'. screen height is '+screen.height );
+
+if (screen.width>=1920){
+ document['body'].style.backgroundImage='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1600){
+ document['body'].style.background='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1440){
+ document['body'].style.background='url('+bgFolder+'bg_with_cloud_1440.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1280){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1280x800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1152){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1152x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1024){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+// Optional
+/* else if (screen.width>=800){
+ document['body'].style.background='url('+bgFolder+'bg800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+} */
+else if (screen.width<=799){
+document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout.jpg)';
+document['body'].style.backgroundRepeat='repeat';
+}
+else {
+ document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+
+}
+  </script>
+
+
+  <script language="Javascript" type="text/javascript">
+$(window).load(function(){
+
+setTimeout ( function () {
+	$('#digg-icon').animate({'margin-left': '90px'}, 800).next().delay(400).animate({'margin-left': '90px', 'margin-top' : '35px' }, 800).next().delay(400).animate({'margin-left': '98px','margin-top': '70px'}, 800).next().delay(400).animate({'margin-left': '123px','margin-top': '95px'}, 800);
+	$('#digg-icon').prev().delay(400).animate({'margin-left': '90px','margin-top': '-35px'}, 800).prev().delay(400).animate({'margin-left': '98px','margin-top': '-70px'}, 800).prev().delay(400).animate({'margin-left': '123px', 'margin-top' : '-95px'}, 800);
+}, 800);
+
+$('#digg-icon, #delicious-icon, #youtube-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '75'}, 200);
+//	$(this).css({'background-position' : '-800px'});
+		
+}, function(){
+	$(this).stop().animate({'margin-left': '90'}, 200);
+});
+
+$('#twitter-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '85', 'margin-top' : '-82'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '98', 'margin-top' : '-70'}, 200);
+});
+
+$('#stumble-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '85', 'margin-top' : '82'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '98', 'margin-top' : '70'}, 200);
+});
+
+$('#facebook-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '112', 'margin-top' : '-107'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '123', 'margin-top' : '-98'}, 200);
+});
+
+$('#rss-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '112', 'margin-top' : '107'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '123', 'margin-top' : '98'}, 200);
+});
+
+	$("#rightsidebar a, #rightsidebar_1 a").hover(function(e) {
+		var y = $(this).offset().top - $("#rightsidebar").offset().top;
+		var content = $(this).attr('title');
+		var id = $(this).attr('id');
+
+		$(this).attr('title', '');
+
+		$("#rightsidebar").append("<div id='s_tooltip'>" + content + "</div>");
+		$("#rightsidebar #s_tooltip").css('opacity', 0.7).css('top', y + 5).css("right", 150).data('trigger', id).fadeIn();
+		},
+			function() {
+			var trigger = $("#rightsidebar #s_tooltip").data('trigger');
+			var content = $("#rightsidebar #s_tooltip").html();
+			$('#' + trigger).attr('title', content);
+			$("#rightsidebar #s_tooltip").remove();
+		});	
+	
+$('#arrange-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -2px'});		
+}, function(){
+	$(this).css({'background-position': '0px -2px'});
+});
+$('#home-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -69px'});		
+}, function(){
+	$(this).css({'background-position': '0px -69px'});
+});
+$('#email-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -136px'});		
+}, function(){
+	$(this).css({'background-position': '0px -136px'});
+});
+
+ $('.blog_post').fadeIn();
+ $('.blog_post').qsort({attr: 'date', order: 'desc'})
+ },function () {
+ $('.blog_post').fadeIn();
+ $('.blog_post').qsort({attr: 'date'})
+ });
+
+});	
+	
+		/* show - hide */
+	
+	    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+</script>
+
+    <script type="text/javascript">  
+ $(document).ready(function(){
+
+	var shiftSpeed = 1500;
+
+	var bigSlideWidth = 600;
+	var bigSlideHeight = 400;
+	var smallSlideWidth = 500;
+	var smallSlideHeight = 300;
+	var tinySlideWidth = 400;
+	var tinySlideHeight = 200;
+	var columnCount = 4;
+	var rowCount = 4;
+	
+
+	function shiftBoxes(boxN) {
+		var col = ( (boxN) % rowCount ) * -1;
+		var row = Math.floor( (boxN) / columnCount ) * -1;
+		$("#big-panel").stop().animate({ left: bigSlideWidth * col, top: bigSlideHeight * row }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#small-panel").stop().animate({ left: smallSlideWidth * col +50, top: smallSlideHeight * row +50 }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#tiny-panel").stop().animate({ left: tinySlideWidth * col +100, top: tinySlideHeight * row +100 }, shiftSpeed, "easeInOutCubic"  ); 
+	}  
+
+	$("ul#console li a").click( function() { 
+		consoleIndex = $("ul#console li a").index(this);
+		shiftBoxes( consoleIndex  ); 
+	});
+
+$(function($) {
+	$('div.slide-wrap').each(function() {
+        var oheight = 320;
+        var owidth = 520;
+        var nheight = 140;
+        var nwidth = 340;
+        var top = ((oheight - nheight) / 2);
+        var left = ((owidth - nwidth) / 2);
+        
+   	$(this).children(0).stop().css({'height':nheight+'px', 'width': nwidth+'px', 'padding-left':'90px','padding-top':'90px' });
+      	$(this).mouseleave(function() {  			
+            $(this).children(0).stop().animate({
+            		  'padding-left':'90px',
+            		  'padding-top':'90px',
+                    'height' : nheight+'px',
+                    'width' : nwidth+'px',
+                    }, 210);     
+        		});
+        $(this).mouseenter(function() {
+            $(this).children(0).stop().animate({
+                   'padding-left':'0px',
+            		  'padding-top':'0px',
+                    'height' : oheight+'px',
+                    'width' : owidth+'px'}, 150, function() {
+                        $(this).css('height', oheight+'px').parent();
+                    });
+        		});
+    		});
+	});
+});
+</script>
+
+</head>
+<body >
+
+<div id="container">
+
+<div id="wrapper">
+
+<div id="header">
+
+<a id="apollo_logo" href="#"><img src="images/apollo_logo_rough.png" height="120px" /></a>
+
+    <ul id="nav">
+    		<li id="selected"><a href="#" >&nbsp;</a></li>
+        <li><a id="info_topmenu" href="#">Info</a></li>
+        <li><a id="blog_topmenu" href="#">Blog</a></li>
+        <li><a id="media_topmenu" href="#">Media</a></li>
+        <li><a id="about_topmenu" href="#">About</a></li>
+        <li><a href="#" >&nbsp;</a></li>      
+    </ul>
+   
+</div>
+
+<div id="space" >
+
+<ul id="apollo_system" >
+<li><a id="information_planet" class="tooltip" href="#" style="display:block;" title="HERICUS || INFORMATION Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum scelerisque urna, vitae pretium odio luctus quis. Aenean scelerisque diam eu enim feugiat laoreet. "><img src="images/planet_5.png" width="333px" style="top:230px; left:20px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="blog_planet" class="tooltip" href="#" style="display:block;" title="ttttttttttttttttttttttttttttt"><img src="images/planet_7.png" width="133px" style="top:10px; left:220px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="media_planet" class="tooltip" href="#" style="display:block;" title="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"><img src="images/planet_6.png" width="233px" style="top:200px; left:700px; position: absolute; z-index: 10;" /></a></li>
+<li><a id="about_planet" class="tooltip" href="#" style="display:block;" title="ilghgjkhgkjjjjjjjjj"><img src="images/planet_8.png" width="80px" style="top:30px; left:900px; position: absolute; z-index: 10;" /></a></li>
+</ul> 
+
+        <div id = "orbit" style="width:718px; height:501px; background: url(images/overlay.png) no-repeat; background-color: rgba(0,0,0,0.4);border:1px solid #96bfe5;-moz-border-radius: 24px;
+    -webkit-border-radius: 24px; margin:auto; z-index:20;"> 
+    
+         <div id="dock" class="dock_shelf"> </div><div id="dock_media" class="dock_shelf"> </div><div id="dock_info" class="dock_shelf"> </div><div id="dock_about" class="dock_shelf"> </div>
+        
+<div id="orbit_center" style="top:72px; left: 210px"><img id="center_planet_blog" src="images/Blog_2.png" width="332px" style="position:absolute; z-index:400;"/>
+
+</div>
+<div id="x_axis">
+   <div id="y_axis"><img id="center_planet" src="images/Information_2.png" width="332px" style="position:absolute; top:-166px; left:-166px; z-index:401;"/>
+      <div id="links">     	
+      	<a id="moon1" onclick="$('#'+open_window[1]).mb_expand();" href="#e?x=250&y=-3&name=jupiter"><img id="moon1_img" src="images/moon_2.png" style="position:absolute;top:-100px;left:-20px;width:3.5em;" /></a>
+    	 	<a id="moon2" onclick="$('#'+open_window[2]).mb_expand();"  href="#f?x=-150&y=-163&name=satur"><img id="moon2_img" src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>
+      	<a id="moon3" onclick="$('#gallery_page').mb_expand();" href="#g?x=-180&y=223&name=uranus"><img id="moon3_img" src="images/moon_3.png" style="position:absolute;top:-20px;left:-20px;width:2.5em;" /></a>
+      	<a id="moon4" href="#g?x=-260&y=43&name=neptune"><img id="moon4_img"src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:1em;" /></a>     
+      </div>
+  </div> 
+</div>   
+        </div>
+
+</div>
+
+  <div id="gallery_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'browser.png', skin:'white', width:'800',iconized:'true', dock:'dock_media', title:'Image Archives'}" style="position:fixed;top:150px;left:400px">
+  
+<div id="viewport">
+
+	<div id="enclosure">
+
+		<div id="tiny-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+		</div> 
+	
+		<div id="small-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div>   
+		</div> 
+
+		<div id="big-panel">
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="images/bg.jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+		</div> 
+
+	</div>  
+	
+	<ul id="console">
+		<li><a href="#1"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#2"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#3"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#4"><img src="images/overlay.png" width="140px" height="140px"/></a></li>
+		<li><a href="#5">5</a></li>
+		<li><a href="#6">6</a></li>
+		<li><a href="#7">7</a></li>
+		<li><a href="#8">8</a></li>
+		<li><a href="#9">9</a></li>
+		<li><a href="#10">10</a></li>
+		<li><a href="#11">11</a></li>
+		<li><a href="#12">12</a></li>
+		<li><a href="#13">13</a></li>
+		<li><a href="#14">14</a></li>
+		<li><a href="#15">15</a></li>
+		<li><a href="#16">16</a></li>
+	</ul>
+   
+</div>
+
+</div>
+  
+  <div id="image_window" class="containerPlus draggable resizable media createwindow {buttons:'f,m,c', icon:'moonov_04.png', skin:'white', width:'650', height:'300', iconized:'false', closed:'true', title:'Image'}" style="position:fixed;top:200px;left:200px;">  
+
+<img id="#image" src="images/Apollo_layout_1920x1080.jpg" width="100%" height="100%" />
+  
+</div>  
+
+  <div id="player_window" class="containerPlus draggable resizable media createwindow {buttons:'f,m,c', icon:'moonov_03.png', skin:'white', width:'800', height:'550', iconized:'false', closed:'true', title:'Video'}" style="position:fixed;top:200px;left:200px;">  
+
+  
+</div>  
+
+<div id="video_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'moonov_03.png', skin:'white', width:'400',dock:'dock_media',iconized:'true', title:'Recordings'}" style="position:fixed;top:200px;left:200px">  
+
+<div class="float">
+  <a href="#" video="[youtube=http://www.youtube.com/watch?v=1fLCbw27F-8]"><img src="images/thumb_awards.jpg" width="150" height="100"
+  alt="image 1" /><br />
+  <p>caption 1</p>
+  </a>
+</div>
+
+<div class="float">
+ <a href="#" video="[youtube=http://www.youtube.com/watch?v=n3jfbAcsfX8]"><img src="images/thumb_robo.jpg" width="150" height="100"
+  alt="image 2" /><br />
+  <p>caption 2</p>
+  </a>
+</div>
+
+<div class="float">
+  <img src="images/moon_3.png" width="100" height="100"
+  alt="image 3" /><br />
+  <p>caption 3</p>
+</div>
+
+<div class="float">
+  <img src="images/moon_6.png" width="100" height="100"
+  alt="image 3" /><br />
+  <p>caption 3</p>
+</div>
+
+<div class="float">
+  <img src="images/moon_1.png" width="100" height="100"
+  alt="image 3" /><br />
+  <p>caption 3</p>
+</div>
+
+<div class="float">
+  <img src="image3.gif" width="100" height="100"
+  alt="image 3" /><br />
+  <p>caption 3</p>
+</div>
+
+<div class="float">
+  <img src="image3.gif" width="100" height="100"
+  alt="image 3" /><br />
+  <p>caption 3</p>
+</div>
+
+</div>  
+
+<div id="blog_console" class="containerPlus draggable media createwindow alone {buttons:'m', skin:'white', width:'340', height:'416', title:'&nbsp;&nbsp;&nbsp;Log', alwaysOnTop:'true', iconized:'false', closed:'true'}" style="position:fixed;top:0px;left:0px; ">  
+<script type="text/javascript">
+(function($) {
+
+	$.fn.spastic = function(options) {
+	
+		options = $.extend({
+			overlap : 10,
+			speed : 500,
+			reset : 1500,
+			color : '#0b2b61',
+			easing : 'easeOutExpo'
+		}, options);
+	
+		return this.each(function() {
+		
+		 	var nav = $(this),
+		 		currentPageItem = $('#selected1', nav),
+		 		blob,
+		 		reset;
+		 		
+		 	$('<li id="blob1"></li>').css({
+		 		height : currentPageItem.outerHeight(),
+		 		width : currentPageItem.outerWidth() + options.overlap,
+		 		left : currentPageItem.position().left,
+		 		top : currentPageItem.position().top 
+		 		//backgroundColor : options.color
+		 	}).appendTo(this);
+		 	
+		 	blob = $('#blob1', nav);
+		 	
+			$('li:not(#blob1)', nav).mouseover(function() {
+				// mouse over
+				clearTimeout(reset);
+				blob.animate(
+					{
+						top : $(this).position().top,
+						height : $(this).height()
+					},
+					{
+						duration : options.speed,
+						easing : options.easing,
+						queue : false
+					}
+				);
+			});
+		
+		}); 
+	
+	};
+
+})(jQuery);
+
+
+
+
+(function($){
+	$.fn.tool = function(options) {
+	//text_clear();	
+	
+		var
+		  defaults = {
+		  	background: 'rgba(0,0,0,0.4)',
+			color: '#afcdcd',
+			rounded: false
+		  },
+		  settings = $.extend({}, defaults, options);
+
+				this.hover(function(e) {
+			
+						  var $this = $(this);
+		  
+		  var ides = this.title;
+		
+		if($(this).is('a') && $this.attr('title') != '') {
+		this.ides= '';
+			
+					$('<div id="blog_tooltip" style="z-index: 700;" ></div>')
+					  .appendTo('#blog_console')
+					 .text(ides)
+					  .hide()
+					  .css({
+						top: 287,
+						left: 360
+					  })
+					  .fadeIn(1500);
+					  				  
+//text_clear();
+									  	  	  	  	  
+				  };
+				}, function() {
+					$('#blog_tooltip').remove();
+				});
+		  return this;
+	}
+	
+})(jQuery);
+
+
+$(document).ready(function(){ 
+$('#blog_list').spastic();
+$('#blog_list a').tool();
+
+
+});
+</script>
+<div id="blog_wrap" >
+  <div class="pikachoose">
+	<ul id="pikame">
+ <li><a href="#"><img src="images/circle.png" ref="images/1.jpg"></a><span><a href="#">What to do when the Force fails</a></span></li>
+ <li><a href="#"><img src="images/circle.png" ref="images/2.jpg"></a><span><a href="#">Klingon in 10 easy steps</a></span></li>
+ <li><a href="#"><img src="images/circle.png" ref="images/3.jpg"></a><span><a href="#">Why Ewoks will rule the galaxy</a></span></li>
+ <li><a href="#"><img src="images/circle.png" ref="images/4.jpg"></a><span><a href="#">How to make sure your TV show isn't pulled</a></span></li>
+ </ul>
+  </div>
+  
+
+  <div style="background: -moz-linear-gradient(top, #092f3d, #96bfe5);margin-top:5px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#092f3d), to(#96bfe5));border:1px solid #96bfe5; height:20px;">
+    <a href="#" id="dateSort" style="padding-left: 149px;"><img src="images/rf.png" width="20px" /></a>
+    </div>
+  
+    <div id="list" style="background:#424242; color: orange; border: #96bfe5 solid 1px; height: 100px; overflow:hidden;">
+  <ul id="blog_list">
+  <li class="blog_post" id="selected1" date="2" tag="space"><a href="#" title="hellllooooo  test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh" onclick="$('#blog_post_1').mb_open()">How to tell if you're a Cylon</a></li>
+
+  <li class="blog_post" date="3" tag="dr who"><a title="TEST2 test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh"href="#" >Why Daleks Make Great Pets</a></li>
+
+  <li class="blog_post" date="1" tag="space"><a  title="Jellllooooo  test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh" href="#" >The End of the Universe</a></li>
+   <li class="blog_post" date="1" tag="universe"><a href="#" >The End of the Universe</a></li>
+    <li class="blog_post" date="1" tag="dr who"><a href="#" >The End of the Universe</a></li>
+     <li class="blog_post" date="1" tag="universe"><a href="#" >The End of the Universe</a></li>
+       <li class="blog_post" date="1" tag="dr who"><a href="#" >The End of the Universe</a></li>
+  </ul>
+  </div>
+	<div style="background:#424242; height: 27px; border: #96bfe5 solid 1px; padding:5px 20% 2px 20%;">
+<a href="#" onmouseover="scroll_down();" onmouseout="stop_scroll();"><img src="images/down.png" width="50px" align="left" /></a>
+<a href="#" onmouseover="scroll_up();" onmouseout="stop_scroll();"><img src="images/up.png" width="50px" align="right"/></a>
+	</div>
+  
+  </div>
+  
+  </div>
+  
+<div id="blog_post_1" class="containerPlus draggable resizable media createwindow scroller {buttons:'f,m,i', icon:'moonov_03.png', skin:'white', width:'800', height:'600', dock:'dock_media',iconized:'false', closed:'true'}" style="position:fixed;top:50px;left:450px;">  
+
+  <div id="blog_header">
+<h2><a href="#">Header</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+</div>
+<div id="blog_wrapper">
+
+<div class="main">
+<h2><a href="#" id="ajax2Opener" onclick="insertMbContainerPlus('ajax2.html','ajax2', '');">Main</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+</div>
+
+<div class="main">
+<h2><a href="#" id="ajax1Opener" onclick="insertMbContainerPlus('ajax1.html','ajax1', '');">Main</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+</div>
+</div>
+<div id="blog_footer">
+<h2><a href="#">Footer</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+</div>
+ 
+</div>   
+
+
+<div id="blog_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'moonov_01.png', skin:'white', width:'800', minWidth:'630', dock:'dock_about', iconized:'true', title:'Blog'}" style="position:fixed;top:300px;left:100px">  
+  
+
+</div>      
+  
+  
+  <div class="containerPlus draggable resizable {buttons:'m,i,c', icon:'alert.png', skin:'white', width:'500', content:'test.html',dock:'dock',iconized:'true', title:'Ajax content!'}" style="top:100px;left:500px">
+    <h3>Attenzione!</h3>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'white', width:'100%',iconized:'true',dock:'dock',title:'Container width 100%'}" >
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'default', width:'500', height:'300', handles:'s,e,se', aspectRatio:true, iconized:'true',dock:'dock',title:'resizable container with aspectRatio active'}">
+    <div class="evidence">
+      <h3>This container resizes maintaining the aspectRatio!</h3>
+      <p>This is a contextualized container and can be resized only vertically;</p>
+      <p>it has a width and a height defined;</p>
+      <p>can be collapsed and can be closed;</p>
+      <p>it has the "default" skin;</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+
+  <div id="demoContainer" class="containerPlus draggable resizable {buttons:'m', icon:'chart.png', skin:'black', width:'500',dock:'dock',closed:'true', rememberMe:false ,title:'container Demo'}" style="position:absolute;top:250px;left:400px; height:50%">
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+ <!-- 
+  <div id="footer">
+
+</div>
+ --> 
+  
+</div>
+
+</div>
+<div id="rightsidebar_1">
+	<a id="facebook-icon" class="rightsidebar-icon" href="#" title="Share us on Facebook" class="pngfix">Share on Facebook</a>
+	<a id="twitter-icon" class="rightsidebar-icon" href="#" title="Share us on Twitter" class="pngfix">Share on Twitter</a>
+	<a id="delicious-icon" class="rightsidebar-icon"  href="#" title="Save on del.icio.us" class="pngfix">Save on del.icio.us</a>
+	<a id="digg-icon" class="fourth rightsidebar-icon" href="#" title="Digg us" class="pngfix">Digg us</a>
+	<a id="youtube-icon" class="rightsidebar-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+	<a id="stumble-icon" class="rightsidebar-icon" href="#" title="Stumble us" class="pngfix">Stumble us</a>
+	<a id="rss-icon" class="rightsidebar-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+</div>
+
+<div id="rightsidebar">
+	<a id="arrange-icon"  href="#" title="You click here to arrange your windows in multiple ways." href="#" class="overlay pngfix">Share this link to a friend</a>
+	<a id="home-icon"  href="#" title="You click here to return to front page." href="#" class="overlay pngfix">Share this link to a friend</a>
+	<a id="email-icon"  href="#" title="You click here to contact us." href="#" class="overlay pngfix">Share this link to a friend</a>
+</div>
+
+
+     <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
+     <script type="text/javascript" src="inc/jquery.min.js"></script>
+    <script type="text/javascript" src="inc/jquery.easing.1.3.js"></script>
+   <script type="text/javascript" src="inc/jquery.spasticNav.js"></script>
+ <!--  <script type="text/javascript" src="inc/jquery.spastic.js"></script>-->
+   <script type="text/javascript" src="inc/jquery.tooltip.js"></script>
+   
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->
+   <script type="text/javascript" src="inc/jquery.ui.js"></script>
+   
+  <script type="text/javascript" src="inc/jquery.metadata.js"></script>
+  <script type="text/javascript" src="inc/mbContainer.js"></script>
+  
+<script type="text/javascript" src="inc/solar_system.js"></script>
+  
+ <script type="text/javascript" src="inc/jquery.tagsphere.js"></script>
+ <script type="text/javascript" src="inc/jquery.mousewheel.min.js"></script>
+ <script type="text/javascript" src="inc/jquery.mb.mediaEmbedder.js"></script>
+ <script type="text/javascript" src="inc/jquery.jcarousel.min.js"></script> 
+ <script type="text/javascript" src="inc/jquery.pikachoose.full.js"></script>
+ <script type="text/javascript" src="inc/qsort.js"></script> 
+
+</body>
+</html>

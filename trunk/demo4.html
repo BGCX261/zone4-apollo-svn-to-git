@@ -1,0 +1,1134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!--
+  ~ jquery.mb.components
+  ~ Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+  ~ email: mbicocchi@open-lab.com
+  ~ site: http://pupunzi.com
+  ~
+  ~ Licences: MIT, GPL
+  ~ http://www.opensource.org/licenses/mit-license.php
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<html>
+<head>
+  <title>mbContainers</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+ <link rel="stylesheet" type="text/css" href="css/mbContainer.css" title="style"  media="screen"/>
+  <style type="text/css">
+#social-bar { height: 305px; width: 6px; position: fixed; right: 17px; top: 50%; margin-top: -153px; z-index: 1000; }
+#social-bar a { display: block; overflow: hidden; text-indent: -8793px; height: 41px; width: 41px; border: medium none; margin-bottom: 3px; margin-right: -17px; }
+#social-bar #facebook-icon { background: url('images/sprite.png') repeat scroll -6px -78px transparent; }
+#social-bar #twitter-icon { background: url('images/sprite.png') repeat scroll -6px -119px transparent; }
+#social-bar #digg-icon { background: url('images/sprite.png') repeat scroll -6px -160px transparent; }
+#social-bar #delicious-icon { background: url('images/sprite.png') repeat scroll -6px -201px transparent; }
+#social-bar #youtube-icon { background: url('images/sprite.png') repeat scroll -6px -242px transparent; }
+#social-bar #stumble-icon { background: url('images/sprite.png') repeat scroll -6px -283px transparent; }
+#social-bar #rss-icon { background: url('images/sprite.png') repeat scroll -6px -324px transparent; }
+#social-bar #email-icon { background: url('images/sprite.png') repeat scroll -6px -365px transparent; }
+#social-bar #arrange-icon { background: url('images/sprite.png') repeat scroll -6px -406px transparent; }
+#social-bar #home-icon { background: url('images/sprite.png') repeat scroll -6px -447px transparent; }
+#social-bar #s_tooltip {
+	 -moz-border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 1px #AAAAAA 1px 1px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    white-space: nowrap;
+    }
+    
+    
+    
+  
+  #contain {
+    width: 1200px;
+    margin: 100px auto;
+}
+
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+#blob {
+    background: #092f3d;
+    border-right: 1px solid #092f3d;
+    border-left: 1px solid #96bfe5;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    background: -moz-linear-gradient(top, #092f3d, #96bfe5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#092f3d), to(#96bfe5));
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-box-shadow: 2px 3px 10px #011331;
+    -webkit-box-shadow: 2px 3px 10px #011331;
+}
+
+#nav {   
+    /*background:url(elements/default/header.png)no-repeat;*/
+    float: right;
+    height: 180px;
+    padding-top: 25px;
+    position:relative;
+}
+
+#nav li {
+    float: left;
+    list-style: none;
+    /*border-right: 1px solid #4a4a4a;
+    border-left: 1px solid black;*/
+}
+
+#nav li a {
+    color: #e3e3e3;
+    z-index: 2;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    font-size: 30px;
+    font-family: rockwell, veranda, sans-serif;
+    text-decoration: none;
+    padding: 10px 15px;
+    width: 100%;
+
+}
+
+
+/*StringBall base                       */
+/*--------------------------------------*/
+ul#stringball{
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	position:relative;
+}
+ul#stringball li{
+	position:absolute;
+	margin:0;
+	padding:0;
+
+
+}
+
+
+/*--------------------------------------*/
+/*StringBall design                     */
+/*--------------------------------------*/
+ul#stringball{
+	width:700px;/*??*/
+	height:400px;/*??*/
+	border:solid 1px #333;
+	font-size:30px;
+	font-weight:bold;
+}
+ul#stringball li a{
+	text-decoration:none;
+	color:#2fffae;
+	border:none;
+}
+
+ul#stringball li a:hover{
+	padding:5px;
+	border:solid 1px #f90;
+}
+
+    
+   html {overflow: hidden;}
+body {width:100%; height:100%; margin:0px; padding:0px;}
+#x_axis {position:absolute;top:50%; left:50%;}
+#y_axis {position:absolute;left:50%;}
+#y_axis_line {border:1px solid #222;position:absolute;left:50%;top:0px;}
+#links a {padding:0px;margin:0px;z-index:100;position:absolute;left:0px;top:0px;width:100%;height:100%;}
+
+
+
+#debug {Opacity:.60;color:#aaa;position:absolute;top:20px;right:20px;border:3px solid #888;padding:5px;}
+#debug div {padding:3px;border-bottom:1px solid #555;background-color:#444;width:180px;}
+
+#debug2 {color:#aaa;position:absolute;top:150px;right:20px;border:3px solid #888;padding:5px;}
+#debug2 div {padding:3px;border-bottom:1px solid #555;background-color:#444;width:180px;}
+
+#debug3 {color:#aaa;position:absolute;top:20px;right:230px;border:3px solid #888;padding:5px;}
+#debug4 {color:#aaa;position:absolute;top:230px;right:20px;border:3px solid #888;padding:5px;}
+
+
+
+a img {border:0px;}
+a:hover {text-decoration:none;border:0px;}
+#holder {color:#aaa;position:absolute;border:3px solid #888;padding:5px;}
+#holder div {padding:3px;border-bottom:1px solid #555;background-color:#444;}
+
+
+
+
+
+
+
+
+ 
+#viewport {
+  background:#333;
+  padding:20px 0;
+  overflow:auto;
+}
+
+#enclosure {
+  width:600px;
+  height:400px;
+  border:0px solid #FFF;
+  position:relative;
+  margin:20px auto;
+  overflow:hidden;
+  background:#111;
+}
+
+
+
+#big-panel {
+  width:1800px;
+  height:1800px;
+  position:relative;
+  z-index:1;
+}
+
+#small-panel {
+  position:absolute;
+  width:1800px;
+  height:1800px;
+  top:50px;
+  left:50px;
+}
+
+#tiny-panel {
+  position:absolute;
+  width:1500px;
+  height:1200px;
+  top:100px;
+  left:100px;
+}
+
+.slide-wrap {
+  float:left;
+}
+
+#big-panel .slide-wrap {
+  width:520px;
+  height:320px;
+  margin:10px;
+  border:30px solid #DDD;
+}
+
+#small-panel .slide-wrap {
+  width:420px;
+  height:220px;
+  margin:20px;
+
+  border:20px solid #AAA;
+}
+
+
+#tiny-panel .slide-wrap {
+  width:340px;
+  height:140px;
+  margin:20px;
+
+  border:10px solid #777;
+}
+
+.slide-wrap p {
+  color:#FFF;
+}
+
+ul#console {
+  width:83px;
+  position:relative;
+  margin:10px auto;
+  list-style:none;
+  overflow:auto;
+}
+
+ul#console li {
+  float:left;
+  margin:1px;
+}
+
+ul#console li a {
+  text-decoration:none;
+  display:block;
+  padding:3px 8px;
+  background:#FC3;
+  color:#333;
+}
+
+
+ul#console li a:hover {
+  background:#FFD;
+}
+
+ul#console li a:focus {
+  background:#F3C;
+}	
+
+
+
+#viewport .afterwards p {
+  clear:both;
+  width:600px;
+  margin:10px auto;
+  color:#FFF;
+}
+
+#tiny-panel a img {
+    position:relative;
+    z-index:1;
+    
+    
+}
+#big-panel img {
+	position:absolute;
+	z-index: 11;
+}
+
+
+
+
+
+</style>
+
+
+  
+ <!-- <script src="inc/rotator.js" type="text/javascript"></script>-->
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="inc/jquery.easing.1.3.js"></script>
+   <script type="text/javascript" src="inc/jquery.spasticNav.js"></script>
+  <script type="text/javascript" src="inc/cloud-carousel.1.0.4.js"></script>
+   <script type="text/javascript" src="inc/jquery.stringball.js"></script>
+   
+    <script type="text/javascript" src="inc/jquery.tooltip.js"></script>
+   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+   
+   
+  <script type="text/javascript" src="inc/jquery.metadata.js"></script>
+  <script type="text/javascript" src="inc/mbContainer.js"></script>
+  
+
+  
+  
+  
+  
+  <script type="text/javascript">
+  /**
+* jQuery solar system by will jessup
+* will -at- willjessup.com or AIM "xdionysisx"
+* This is a demo of jQuery and a bit of fun javaScript - released under creative commons
+* thanks john for choosing awesome planet images
+* IE fixes by Krzysztof Finowicki
+* Update - pluto is no longer a planet , oops. 
+*/
+
+//kff: see my comments
+
+//kff: declare global variables first
+var de;
+var w;
+var h;
+
+//kff: declare and define constants and initial values for other variables
+var xm=0;                       
+var ym=0;
+var ay=2;
+var sin=Math.sin(ay*Math.PI/180);
+var cos=Math.cos(ay*Math.PI/180); 
+var angle = 0;
+var k=0;
+
+var elem = [];
+
+//default distance of "camera" from coordate grid
+var camDist = 400;
+
+//speed of rotation
+var scale = .05;
+
+//vertical angle
+var vpsi = 0;
+
+var fontScale = .0005;
+
+//kff: declare and define default value of psi
+var psi = 1.0;
+
+//kff: essential calculations should be done on document ready, not earlier !!! (this is what this function is for!)
+
+$(document).ready(function(){ 
+
+  de = document.documentElement;
+  w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+  h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
+//disk angle (between 0 and 90). 0 is flat w/ no Y movement and 90 will move in a perfect circle.
+  psi = Math.abs(Math.sin((ym-h*.5)/h*Math.PI));
+});
+
+// not using $() here to recude # of query calls since onmousemove gets called so often that it needs optimization
+document.onmousemove = function(e) {
+	if (window.event) e = window.event;
+	xm = 400;
+        ym = 400;
+
+//kff: I'm not sure if it is necessary to repeat these calculations on each mousemove
+// maybe in onresize (if you want to optimize)? but I will not change it
+	var de = document.documentElement;
+        var w = window.innerWidth || self.innerWidth || (de&&de.clientWidth) || document.body.clientWidth;
+        var h = window.innerHeight || self.innerHeight || (de&&de.clientHeight) || document.body.clientHeight;
+
+
+        /**
+	*set the amplitude of the function equal to height of the browser, shifted by 180 degrees (half browser height).
+	*returns value between 90 and 0 degrees for any mouse movement on the screen
+	*/
+        psi=Math.sin((ym-h*.5)/h*Math.PI);
+        vpsi= Math.sin((ym-h*.5)/h*Math.PI)*90;
+	sin=Math.sin((-xm+w*.5)/w*Math.PI);
+	cos=Math.cos((-xm+w*.5)/w*Math.PI);
+}
+$.fn.cartesianToCircular = function() {
+
+    //with each link element, convert it and store it in elements
+    for(i=0; i<this.length; i++) {
+                      if ( !elem[i] ) elem[i] = {};
+                      var curLink = this[i].href;
+                      var queryString = curLink.replace(/^[^\?]+\??/,'');
+                      params = parseQuery( queryString );
+
+                      x = params['x'];
+                      y = params['y'];
+                      r = parseInt(Math.abs(Math.sqrt(x*x+y*y)));
+                      
+                      //angle from 0 between -pi/pi  , need to add 180 degrees for anything in 2,3 quadrant
+                      if(x<0)
+                         theta= (Math.atan(y/x)*180/Math.PI)+180;
+                      else
+                         theta= (Math.atan(y/x)*180/Math.PI);
+
+                      //circular coords
+                      elem[i].theta = theta;
+                      elem[i].r = r;
+    }
+}
+$.fn.rotate = function () {
+        for(i=0; i<this.length; i++) {
+                      if (!elem[i]) elem[i] = {};
+
+                      //angle of the system
+                      angle += sin*scale;
+
+                      //the angle of each elem + their theta offset
+                      elem[i].angle = (angle + elem[i].theta)*(400/(elem[i].r^2));
+
+
+                      X = elem[i].r*Math.cos(elem[i].angle*Math.PI/180);
+                      Y = elem[i].r*Math.sin(elem[i].angle*Math.PI/180)*psi;
+
+                      elem[i].dist = parseInt(elem[i].r*Math.cos(vpsi*Math.PI/180)*Math.sin(elem[i].angle*Math.PI/180)+camDist);
+
+                      //scale factor for sizing
+                      size = (elem[i].dist - 20)/200;
+                    
+                      //was using jquery to set the CSS like this, but the following is faster
+		      //$(this[i]).css({left:  X + "px", top:  -Y + "px", fontSize: size + "em", opacity: (size*10)/30 });
+
+                          this[i].style.top = -Y + "px";
+                          this[i].style.left = X + "px";
+                          this[i].style.fontSize = size + "em";
+                          this[i].style.opacity  = (size*10)/5;
+                          this[i].style.zIndex  = elem[i].dist;
+                      
+
+	}
+}
+var items;
+function run(){
+        items.rotate();
+        $("#angle").html("r angle =" + parseInt(angle));
+        $("#vangle").html("v angle =" + parseInt(vpsi));
+        $("#elm1d").html("elm2 dist =" + elem[1].dist);
+        $("#camDist").html("camera Distance =" + camDist);
+	setTimeout("run()", 16);
+}
+
+$(document).ready(function(){
+        items = $("#links a");
+        items.cartesianToCircular();
+	run();
+
+});
+
+  function parseQuery ( query ) {
+     var Params = new Object ();
+     if ( ! query ) return Params; // return empty object
+     var Pairs = query.split(/[;&]/);
+     for ( var i = 0; i < Pairs.length; i++ ) {
+        var KeyVal = Pairs[i].split('=');
+        if ( ! KeyVal || KeyVal.length != 2 ) continue;
+        var key = unescape( KeyVal[0] );
+        var val = unescape( KeyVal[1] );
+        val = val.replace(/\+/g, ' ');
+        Params[key] = val;
+     }
+     return Params;
+  }
+
+
+  
+  
+  </script>
+  
+  
+  
+      <script type="text/javascript">
+      
+      
+      
+      
+      
+      
+      $(document).ready(function(){
+$('#nav').spasticNav();
+
+
+$('a.tooltip').tooltip({
+rounded:true
+});
+
+
+
+
+
+
+
+/*
+$("#carousel1").CloudCarousel(		
+		{			
+			xPos: 128,
+			yPos: 32,
+			buttonLeft: $("#left-but"),
+			buttonRight: $("#right-but"),
+			altBox: $("#alt-text"),
+			titleBox: $("#title-text")
+		}
+	);
+/*
+	
+	$(document).ready(function(){
+/*
+ $("#da-vinci-carousel").CloudCarousel( {
+ reflHeight: 56,
+ reflGap:2,
+ titleBox: $('#da-vinci-title'),
+ altBox: $('#da-vinci-alt'),
+ buttonLeft: $('#but1'),
+ buttonRight: $('#but2'),
+ yRadius:40,
+ xPos: 285,
+ yPos: 120,
+ speed:0.15,
+ mouseWheel:true
+ }); */
+
+$("#carousel1").CloudCarousel({
+
+minScale:0.25,
+ xPos:380,
+ yPos:280,
+/* buttonLeft: $('#but3'),
+ buttonRight: $('#but4'),
+*/ FPS:60,
+ autoRotate: 'left',
+ autoRotateDelay: 1800,
+ speed:0.02,
+ mouseWheel:false,
+ bringToFront:true
+ });
+
+$("ul#stringball").stringball({
+		camd:800,  //???????????
+		radi:250, //?????????
+		speed:20,  //?????????
+		framerate:60  //??????????(10/4/21??)
+
+});
+
+
+
+
+});
+    </script>
+  
+<!--  <script type="text/javascipt">
+
+function centerPage() {
+var screenWidth = screen.width;
+if(screenWidth < 1200) {
+var scrollRight = (1200 - screenWidth) / 2;
+window.scrollBy(scrollRight);
+}
+}
+</script>-->
+
+<script type="text/javascript"> 
+window.onload=function (){
+
+var bgFolder = 'images/';
+
+if (screen.width>=1920){
+ document['body'].style.backgroundImage='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1600){
+ document['body'].style.background='url('+bgFolder+'bg_no_galaxy.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1440){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1440x810.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1280){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1280x800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1152){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1152x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+else if (screen.width>=1024){
+ document['body'].style.background='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+// Optional
+/* else if (screen.width>=800){
+ document['body'].style.background='url('+bgFolder+'bg800.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+} */
+else if (screen.width<=799){
+document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout.jpg)';
+document['body'].style.backgroundRepeat='repeat';
+}
+else {
+ document['body'].style.backgroundImage='url('+bgFolder+'Apollo_layout_1024x1080.jpg)';
+ document['body'].style.backgroundRepeat='repeat-x';
+}
+
+}
+  </script>
+  
+  <script type="text/javascript">
+    $(function(){
+      $(".containerPlus").buildContainers({
+        containment:"document",
+        elementsPath:"elements/",
+        onClose:function(o){},
+        onIconize:function(o){},
+        effectDuration:200
+      });
+
+      if (!$("#demoContainer").mb_getState("closed")){
+        $('#close').fadeIn();$('#actions').fadeIn(); $("#open").hide(); $('#open_change').hide();
+      }
+    });
+  </script>
+
+  <script language="Javascript" type="text/javascript">
+$(document).ready(function(){
+
+	// Social Bar Hover Effect
+	$('#social-bar a').hover(function() {
+		$(this).stop().animate({'margin-left' : '-18px'}, 200);
+	}, function(){
+		$(this).stop().animate({'margin-left' : '0'}, 200);
+	});
+
+	// Social Bar Tooltips
+	$("#social-bar a").hover(function(e) {
+		var y = $(this).offset().top - $("#social-bar").offset().top;
+		var content = $(this).attr('title');
+		var id = $(this).attr('id');
+
+		$(this).attr('title', '');
+
+		$("#social-bar").append("<div id='s_tooltip'>" + content + "</div>");
+		$("#social-bar #s_tooltip").css('opacity', 0.7).css('top', y + 8).css("right", 50).data('trigger', id).fadeIn();
+	},
+		function() {
+			var trigger = $("#social-bar #s_tooltip").data('trigger');
+			var content = $("#social-bar #s_tooltip").html();
+			$('#' + trigger).attr('title', content);
+			$("#social-bar #s_tooltip").remove();
+		}
+	);
+	
+	});
+/*	
+	(function($) {
+$.fn.lavaLamp = function(o) {
+    o = $.extend({ fx: "linear", speed: 500, click: function(){} }, o || {});
+
+    return this.each(function() {
+        var me = $(this), noop = function(){},
+            $back = $('<li class="back"><div class="left"></div></li>').appendTo(me),
+            $li = $("li", this), curr = $("li.current", this)[0] || $($li[0]).addClass("current")[0];
+
+        $li.not(".back").hover(function() {
+            move(this);
+        }, noop);
+
+        $(this).hover(noop, function() {
+            move(curr);
+        });
+
+        $li.click(function(e) {
+            setCurr(this);
+            return o.click.apply(this, [e, this]);
+        });
+
+        setCurr(curr);
+
+        function setCurr(el) {
+            $back.css({ "left": el.offsetLeft+"px", "width": el.offsetWidth+"px" });
+            curr = el;
+        };
+
+        function move(el) {
+            $back.each(function() {
+                $(this).dequeue(); }
+            ).animate({
+                width: el.offsetWidth,
+                left: el.offsetLeft
+            }, o.speed, o.fx);
+        };
+
+    });
+};
+})(jQuery);*/
+	
+	
+		/* show - hide */
+	
+	    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+</script>
+
+</head>
+<body>
+
+<div id="container">
+
+<div id="wrapper">
+
+<div id="header">
+<img src="images/apollo_logo_rough.png" height="120px" />
+    <ul id="nav">
+        <li id="selected"><a href="#">Info</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Media</a></li>
+        <li><a href="#">About</a></li>
+        
+    </ul>
+
+</div>
+
+<div id="space">
+
+<!--</div>
+<div style="background:url(elements/default/planet_menu.png)no-repeat; width:734px; height:517px;display:none; margin:auto; position:relative;" id="planet_menu">
+</div>-->
+
+<a id="information_planet" href="#" onclick="toggle_visibility('orbit'),toggle_visibility('information_planet'),toggle_visibility('blog_planet'),toggle_visibility('media_planet'),toggle_visibility('about_planet') " class="tooltip" style="display:block;" title="HERICUS || INFORMATION Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum scelerisque urna, vitae pretium odio luctus quis. Aenean scelerisque diam eu enim feugiat laoreet. "><img src="images/Information_2.png" width="333px" style="top:230px; left:20px; position: absolute; z-index: 10;" /></a>
+<a id="blog_planet" href="#" onclick="toggle_visibility('orbit'),toggle_visibility('blog_planet') " class="tooltip" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/Blog_2.png" width="133px" style="top:10px; left:220px; position: absolute; z-index: 10;" /></a>
+<a id="media_planet" href="#" onclick="toggle_visibility('orbit'),toggle_visibility('blog_planet') " class="tooltip" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/Media_2.png" width="233px" style="top:200px; left:700px; position: absolute; z-index: 10;" /></a>
+<a id="about_planet" href="#" onclick="toggle_visibility('orbit'),toggle_visibility('blog_planet') " class="tooltip" style="display:block;" title="<h6>The BLOG'O'SPHERE</h6> dippy dippy day doo duuu dee"><img src="images/About_2.png" width="80px" style="top:30px; left:900px; position: absolute; z-index: 10;" /></a>
+
+
+<!--<a href="#"><img style="position:absolute; top:300px; left:730px;" src="images/About_2.png" width="200px" height="250px" /></a>
+<a href="#"><img style="position:absolute; top:300px; right:500px;" src="images/Media_2.png" width="110px" height="113px" /></a>
+<a href="#"><img style="position:absolute; top:260px; left:750px;" src="elements/default/planet3.png" width="109" height="108" /></a>-->
+
+
+<a id="close" href="#" onclick="$('#overlay3').mb_close(); $('#actions').fadeOut(); $('#open').fadeIn();" style="display:none;">close container</a>
+<!--<a href="#" id="open" onclick="$('#overlay3').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet2.png" style="position:absolute; top:260px; left:250px;" width="110" height="113"></a>
+<a href="#" id="open" onclick="$('#overlay4').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet1.png" style="position:absolute; top:460px; left:250px;"width="212" height="68"></a>
+<a href="#" id="open" style="position:absolute; top:300px; right:500px;"><img src="elements/default/planet3.png" width="109" height="108"></a>-->
+
+<!-- This is the container for the carousel. -->
+        <div id = "orbit" style="width:718px; height:501px; background: url(images/overlay.png) no-repeat; background-color: rgba(0,0,0,0.4);border:1px solid #96bfe5;-moz-border-radius: 24px;
+    -webkit-border-radius: 24px; margin:auto; display:none; z-index:20;"> 
+        <div id="dock"> </div>
+<div id="x_axis">
+   <div id="y_axis"><img src="images/Media_2.png" width="332px" style="position:absolute;top:-166px;left:-166px;z-index:400;"/>
+      <div id="links">
+      	
+      	<a onclick="$('#gallery').mb_expand();" href="#e?x=250&y=-3&name=jupiter"><img src="images/moon_2.png" style="position:absolute;top:-20px;left:-20px;width:3.5em;" /></a>
+      	<a href="#f?x=-150&y=-163&name=satur"><img src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>
+      	<a href="#g?x=-180&y=223&name=uranus"><img src="images/moon_3.png" style="position:absolute;top:-20px;left:-20px;width:2.5em;" /></a>
+      	<a href="#g?x=-260&y=43&name=neptune"><img src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:1em;" /></a>
+      	
+      </div>
+  </div> 
+</div>        
+
+        </div>
+ 
+ 
+
+<!--have to fake the y-axis grid line here-->
+
+
+
+<div style="margin-top:600px;float:right;">
+<ul id="stringball">
+	<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+		<li><a href="#">text1</a></li>
+	<li><a href="#">text2</a></li>
+	<li><a href="#">text4</a></li>
+      
+</ul>
+</div>
+
+</div>
+
+<div id="content">
+
+</div>
+
+
+  <div id="overlay3" class="containerPlus draggable resizable {buttons:'m,i,c', skin:'default', width:'900', height:'200', title:'Dock'} " style="position:fixed;top:800px; left:30px;">
+<div id="dock"> </div><div style="clear:both;"></div>
+    <hr><br>
+    <a href="#" id="open" href="#" onclick="$('#overlay2').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet1.png" width="212" height="68"></a>
+    <img src="elements/default/planet3.png"  width="109" height="108">
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+ 
+    <div id="overlay4" class="containerPlus draggable resizable {buttons:'m,i,c', skin:'default', width:'900', height:'100', title:'Dock'} " style="top:300px; left:30%; display:none;">
+   
+    <hr><br>
+    
+        
+    
+    <a href="#" id="open" href="#" onclick="$('#overlay2').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet1.png" width="212" height="68"></a>
+    <img src="elements/default/planet3.png"  width="109" height="108">
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+  
+      <div id="overlay5" class="containerPlus draggable resizable {buttons:'m,i,c', skin:'default', width:'900', height:'100', title:'Dock'} " style="top:700px; left:30%; display:none;">
+    
+    <hr><br>
+    <a href="#" id="open" href="#" onclick="$('#overlay2').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet1.png" width="212" height="68"></a>
+    <img src="elements/default/planet3.png"  width="109" height="108">
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+  
+  <div id="overlay2" class="containerPlus draggable resizable {buttons:'m', skin:'default', width:'900', height:'800', title:'Dock', iconized:'true' }" style="top:300px; left:30%">
+    
+    <hr><br>
+   
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+
+  <div id="gallery" class="containerPlus draggable resizable {buttons:'m,i,c', icon:'browser.png', skin:'white', width:'800',iconized:'true', dock:'dock', title:'grid drag'}" style="position:fixed;top:100px;left:400px">
+    <script type="text/javascript">  
+ $(document).ready(function(){
+
+	var shiftSpeed = 1500;
+
+	var bigSlideWidth = 600;
+	var bigSlideHeight = 400;
+	var smallSlideWidth = 500;
+	var smallSlideHeight = 300;
+	var tinySlideWidth = 400;
+	var tinySlideHeight = 200;
+	var columnCount = 4;
+	var rowCount = 4;
+
+	//$("#enclosure").css({backgroundColor: "#ddd"});
+
+	//$("ul#console li a:eq(4)").css({fontWeight: "bold"});
+
+	//$("#big-panel").css({backgroundColor: "#ddd"});
+	
+
+	function shiftBoxes(boxN) {
+		var col = ( (boxN) % rowCount ) * -1;
+		var row = Math.floor( (boxN) / columnCount ) * -1;
+		$("#big-panel").stop().animate({ left: bigSlideWidth * col, top: bigSlideHeight * row }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#small-panel").stop().animate({ left: smallSlideWidth * col +50, top: smallSlideHeight * row +50 }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#tiny-panel").stop().animate({ left: tinySlideWidth * col +100, top: tinySlideHeight * row +100 }, shiftSpeed, "easeInOutCubic"  ); 
+	}  
+
+	$("ul#console li a").click( function() { 
+		consoleIndex = $("ul#console li a").index(this);
+		shiftBoxes( consoleIndex  ); 
+	});
+
+
+$(function($) {
+    $('a.zoom').each(function() {
+        var oheight = $(this).children(0).height();
+        var owidth = $(this).children(0).width();
+        var nheight = 320;
+        var nwidth = 520;
+        var top = ((oheight - nheight) / 2);
+        var left = ((owidth - nwidth) / 2);
+        
+       
+ 		$("#big-panel").mouseenter(function() {
+ 			$("#big-panel").css('z-index','0');
+ 		});/*
+ 		$("#viewport").mouseleave(function(){
+ 			$("#big-panel").css('z-index','1');
+ 		});
+ 		*/
+ 		
+ 		
+ 
+        $(this).mouseenter(function() {
+   			
+            $(this).css('z-index', '10').children(0).stop().animate({
+                    'height' : nheight+'px',
+                    'width' : nwidth+'px',
+                    'left' : top+'px',
+                    'top' : left+'px'}, 210);
+        		$('a.zoom').not(this).fadeOut();
+        });
+ 
+        $(this).mouseleave(function() {
+            $(this).children(0).stop().animate({
+                    'left' : '0px',
+                    'top' : '0px',
+                    'height' : oheight+'px',
+                    'width' : owidth+'px'}, 150, function() {
+                        $(this).css('height', oheight+'px').parent().css('z-index', '1');
+                    });
+        		$('a.zoom').not(this).fadeIn(function() {
+        					$("#big-panel").css('z-index','1');
+        		});
+        });
+ 
+    });
+});	
+	
+	
+
+});
+</script>
+    
+    
+    <div id="viewport">
+
+	<div id="enclosure">
+
+		<div id="tiny-panel">
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_image.jpg" width="340px" height="140px"></a></div> 
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div> 
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div>  
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div>  
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div>  
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div> 
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div>  
+			<div class="slide-wrap"><a href="#" class="zoom"><img src="images/window_information.jpg" width="340px" height="140px"></a></div>  
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+		</div> 
+
+	
+		<div id="small-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div>   
+		</div> 
+
+		<div id="big-panel">
+			<div class="slide-wrap"><img src="images/window_information.jpg" width="520px" height="320px" /></div> 
+			<div><div class="slide-wrap"><p>two</p></div> </div>
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div>  
+		</div> 
+	
+	
+
+	</div>  
+	
+	<ul id="console">
+		<li><a href="#1">1</a></li>
+		<li><a href="#2">2</a></li>
+		<li><a href="#3">3</a></li>
+		<li><a href="#4">4</a></li>
+		<li><a href="#5">5</a></li>
+		<li><a href="#6">6</a></li>
+		<li><a href="#7">7</a></li>
+		<li><a href="#8">8</a></li>
+		<li><a href="#9">9</a></li>
+		<li><a href="#10">10</a></li>
+		<li><a href="#11">11</a></li>
+		<li><a href="#12">12</a></li>
+		<li><a href="#13">13</a></li>
+		<li><a href="#14">14</a></li>
+		<li><a href="#15">15</a></li>
+		<li><a href="#16">16</a></li>
+	</ul>
+   
+</div>
+    <div class="evidence">
+    <a href="#" class="zoom"><img src="images/window_image.jpg" width="340px" height="140px"></a>
+      <h3>And this can be drag with a 100 X 100 grid!</h3>
+      <p>to preiconize containers just add the param <span style="font-weight: bold;">iconized:'true'</span></p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus draggable resizable {buttons:'m,i,c', icon:'alert.png', skin:'white', width:'500', content:'test.html',dock:'dock',iconized:'true', title:'Ajax content!'}" style="top:100px;left:500px">
+    <h3>Attenzione!</h3>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'white', width:'100%',iconized:'true',dock:'dock',title:'Container width 100%'}" >
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'default', width:'500', height:'300', handles:'s,e,se', aspectRatio:true, iconized:'true',dock:'dock',title:'resizable container with aspectRatio active'}">
+    <div class="evidence">
+      <h3>This container resizes maintaining the aspectRatio!</h3>
+      <p>This is a contextualized container and can be resized only vertically;</p>
+      <p>it has a width and a height defined;</p>
+      <p>can be collapsed and can be closed;</p>
+      <p>it has the "default" skin;</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+
+  <div id="demoContainer" class="containerPlus draggable resizable {buttons:'m', icon:'chart.png', skin:'black', width:'500',dock:'dock',closed:'true', rememberMe:true,title:'container Demo'}" style="position:absolute;top:250px;left:400px; height:50%">
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>-->
+  <!--
+  <div id="footer">
+Footer
+</div>
+  -->
+  
+</div>
+
+</div>
+<div id="social-bar">
+	<a id="facebook-icon" href="#" title="Share us on Facebook" class="pngfix">Share on Facebook</a>
+	<a id="twitter-icon" href="#" title="Share us on Twitter" class="pngfix">Share on Twitter</a>
+	<a id="digg-icon" href="#" title="Digg us" class="pngfix">Digg us</a>
+	<a id="delicious-icon" href="#" title="Save on del.icio.us" class="pngfix">Save on del.icio.us</a>
+	<a id="stumble-icon" href="#" title="Stumble us" class="pngfix">Stumble us</a>
+	<a id="rss-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+	<a id="email-icon" href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	<a id="arrange-icon" href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	<a id="home-icon" href="#" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	
+	<button id="center" onclick="$('#overlay5').mb_resizeTo(600,600);$('#overlay3').mb_resizeTo(600,600);$('#overlay4').mb_resizeTo(600,600);$('#overlay5').mb_setPosition(200,140);$('#overlay3').mb_setPosition(100,140);$('#overlay4').mb_setPosition(150,140);$('#overlay5').mb_toggle();$('#overlay3').mb_toggle();$('#overlay4').mb_toggle();">center on window</button>
+	<!--<div id="dock"> </div><div style="clear:both;"></div>-->
+</div>
+
+</body>
+</html>

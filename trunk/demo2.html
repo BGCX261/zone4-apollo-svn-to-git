@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<!--
+  ~ jquery.mb.components
+  ~ Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
+  ~ email: mbicocchi@open-lab.com
+  ~ site: http://pupunzi.com
+  ~
+  ~ Licences: MIT, GPL
+  ~ http://www.opensource.org/licenses/mit-license.php
+  ~ http://www.gnu.org/licenses/gpl.html
+  -->
+
+<html>
+<head>
+  <title>mbContainers</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+  <link rel="stylesheet" type="text/css" href="css/mbContainer.css" title="style"  media="screen"/>
+  <style type="text/css">
+#social-bar { height: 305px; width: 6px; position: fixed; right: 17px; top: 50%; margin-top: -153px; z-index: 1000; }
+#social-bar a { display: block; overflow: hidden; text-indent: -8793px; height: 41px; width: 41px; border: medium none; margin-bottom: 3px; margin-right: -17px; }
+#social-bar #facebook-icon { background: url('sprite.png') repeat scroll -6px -78px transparent; }
+#social-bar #twitter-icon { background: url('sprite.png') repeat scroll -6px -119px transparent; }
+#social-bar #rss-icon { background: url('sprite.png') repeat scroll -6px -160px transparent; }
+#social-bar #email-icon { background: url('sprite.png') repeat scroll -6px -201px transparent; }
+#social-bar #stumble-icon { background: url('sprite.png') repeat scroll -6px -242px transparent; }
+#social-bar #delicious-icon { background: url('sprite.png') repeat scroll -6px -283px transparent; }
+#social-bar #digg-icon { background: url('sprite.png') repeat scroll -6px -324px transparent; }
+#social-bar #tooltip {
+	 -moz-border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 1px #AAAAAA 1px 1px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    white-space: nowrap;
+    }
+  </style>
+  
+ <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+   <!--<script type="text/javascript" src="inc/jquery.min.js"></script>-->
+  
+  
+  <script type="text/javascript" src="inc/jquery.metadata.js"></script>
+  <script type="text/javascript" src="inc/mbContainer.js"></script>
+
+  
+<!--  <script type="text/javascipt">
+
+function centerPage() {
+var screenWidth = screen.width;
+if(screenWidth < 1200) {
+var scrollRight = (1200 - screenWidth) / 2;
+window.scrollBy(scrollRight);
+}
+}
+</script>-->
+  
+  </script>
+  
+  <script type="text/javascript">
+    $(function(){
+      $(".containerPlus").buildContainers({
+        containment:"document",
+        elementsPath:"elements/",
+        onClose:function(o){},
+        onIconize:function(o){},
+        effectDuration:200
+      });
+
+      if (!$("#demoContainer").mb_getState("closed")){
+        $('#close').fadeIn();$('#actions').fadeIn(); $("#open").hide(); $('#open_change').hide();
+      }
+    });
+  </script>
+
+  <script language="Javascript" type="text/javascript">
+$(document).ready(function(){
+
+	// Social Bar Hover Effect
+	$('#social-bar a').hover(function() {
+		$(this).stop().animate({'margin-left' : '-18px'}, 200);
+	}, function(){
+		$(this).stop().animate({'margin-left' : '0'}, 200);
+	});
+
+	// Social Bar Tooltips
+	$("#social-bar a").hover(function(e) {
+		var y = $(this).offset().top - $("#social-bar").offset().top;
+		var content = $(this).attr('title');
+		var id = $(this).attr('id');
+
+		$(this).attr('title', '');
+
+		$("#social-bar").append("<div id='tooltip'>" + content + "</div>");
+		$("#social-bar #tooltip").css('opacity', 0.7).css('top', y + 8).css("right", 50).data('trigger', id).fadeIn();
+	},
+		function() {
+			var trigger = $("#social-bar #tooltip").data('trigger');
+			var content = $("#social-bar #tooltip").html();
+			$('#' + trigger).attr('title', content);
+			$("#social-bar #tooltip").remove();
+		}
+	);
+
+	/* show - hide */
+	
+	});
+	
+	    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+</script>
+  
+</head>
+<body>
+<div id="container">
+<div id="space">
+<IMG STYLE="position:absolute; TOP:460px; LEFT:330px;" SRC="elements/default/sun.png" width="442" height="445">
+<img style="position:absolute; top:500px; right:730px;" src="elements/default/planet1.png" width="212" height="68">
+<img style="position:absolute; top:300px; right:500px;" src="elements/default/planet2.png" width="110" height="113">
+<a id="close" href="#" onclick="$('#overlay1').mb_close(); $('#actions').fadeOut(); $('#open').fadeIn();" style="display:none;">close container</a>
+<a href="#"><img style="position:absolute; top:260px; left:750px;" src="elements/default/planet3.png" width="109" height="108"></a>
+</a>
+<a href="#" onclick="toggle_visibility('planet_menu')"><img src="elements/default/planet3.png" style="float: right;"width="109" height="108"></a>
+<a href="#" id="open" onclick="$('#overlay1').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet3.png"  width="109" height="108"></a>
+</a>
+<div style="display:none;" id="planet_menu">
+<img src="elements/default/planet_menu.png" width="734" height="517"/>
+
+</div>
+</div>
+
+ 
+
+
+
+<div id="wrapper">
+
+<div id="header">
+Header
+</div>
+
+<div id="content">
+
+</div>
+
+
+
+  <div id="overlay1" class="containerPlus draggable resizable {buttons:'m', skin:'default', width:'900', height:'800', title:'Dock' } $('#overlay1').hide();" style="top:300px; left:30%">
+    <div id="dock"> </div><div style="clear:both;"></div>
+    <hr><br>
+    <a href="#" id="open" href="#" onclick="$('#overlay2').mb_open(); $('#close').fadeIn();"><img src="elements/default/planet1.png" width="212" height="68"></a>
+    <img src="elements/default/planet3.png"  width="109" height="108">
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+  
+  <div id="overlay2" class="containerPlus draggable resizable {buttons:'m', skin:'default', width:'900', height:'800', title:'Dock', iconized:'true' }" style="top:300px; left:30%">
+    <div id="dock"> </div><div style="clear:both;"></div>
+    <hr><br>
+   
+    <b>this container is always on top!</b>
+    <p>by setting the metatag: alwaysOnTop:true, this container stay over the others.</p>
+    <b>You can choose where the iconized containers are stored!</b>
+    <p>this is an example, but you can define whatever DOM element you want as your dock; and each iconizable container can have its one or none (in that case it's iconized at left:0 of its parent)!</p>
+    <b>preminimize a container</b>
+    <p>to preminimize containers just add the param <span style="font-weight: bold;">collapsed:'true'</span></p>
+    <p>You can verify the state of this container by pressing the button at the end of this page.</p>
+    <p>to verify the state of a container you have a metod <span style="font-weight: bold;">$.fn.mb_getState(attr)</span>; you can pass the attribute to verify (ex: collapsed or iconized) and it returns
+      <span style="font-weight: bold;">true</span> or <span style="font-weight: bold;">false</span></p>
+  </div>
+
+  <div class="containerPlus draggable resizable {buttons:'m,i,c', icon:'browser.png', skin:'white', width:'500',iconized:'true', dock:'dock', grid:100, title:'grid drag'}" style="position:fixed;top:100px;left:400px">
+    <div class="evidence">
+      <h3>And this can be drag with a 100 X 100 grid!</h3>
+      <p>to preiconize containers just add the param <span style="font-weight: bold;">iconized:'true'</span></p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus draggable resizable {buttons:'m,i,c', icon:'alert.png', skin:'white', width:'500', content:'test.html',dock:'dock',iconized:'true', title:'Ajax content!'}" style="top:100px;left:500px">
+    <h3>Attenzione!</h3>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'white', width:'100%',iconized:'true',dock:'dock',title:'Container width 100%'}" >
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+    <p>Nulla facilisi. Vestibulum vel magna in ante lobortis semper. Integer posuere justo et urna. Vestibulum sit amet sapien ut quam tempor fringilla. Fusce a neque a enim mattis dapibus. Ends with a paragraph element!</p>
+  </div>
+
+
+  <div class="containerPlus resizable {buttons:'m,i,c', skin:'default', width:'500', height:'300', handles:'s,e,se', aspectRatio:true, iconized:'true',dock:'dock',title:'resizable container with aspectRatio active'}">
+    <div class="evidence">
+      <h3>This container resizes maintaining the aspectRatio!</h3>
+      <p>This is a contextualized container and can be resized only vertically;</p>
+      <p>it has a width and a height defined;</p>
+      <p>can be collapsed and can be closed;</p>
+      <p>it has the "default" skin;</p>
+    </div>
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+
+  <div id="demoContainer" class="containerPlus draggable resizable {buttons:'m', icon:'chart.png', skin:'black', width:'500',dock:'dock',closed:'true', rememberMe:true,title:'container Demo'}" style="position:absolute;top:250px;left:400px; height:50%">
+    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Cras metus. Maecenas justo elit, lacinia sit amet, cursus ut, sagittis sed, eros. Suspendisse potenti. Maecenas nec nisi. Donec vestibulum sollicitudin tellus. Sed consequat pellentesque ante. Vestibulum turpis quam, vulputate nec, nonummy convallis, ultrices congue, ligula. Ut rutrum leo et orci. Proin pharetra. Nam non sem ut eros fringilla ornare. In ullamcorper lorem eget ipsum. Suspendisse semper enim in arcu cursus consectetuer. Suspendisse potenti. Proin libero eros, adipiscing quis, volutpat in, ultrices ut, lacus.</p>
+  </div>
+  
+  <div id="footer">
+Footer
+</div>
+  
+  
+</div>
+
+</div>
+<div id="social-bar">
+	<a id="facebook-icon" href="http://www.facebook.com/share.php?u=http://www.6wunderkinder.com/" title="Share us on Facebook" class="pngfix">Share on Facebook</a>
+	<a id="twitter-icon" href="http://twitter.com/share?url=http://www.6wunderkinder.com/&amp;text=Apps%20That%20Boost%20Your%20Productivity" title="Share us on Twitter" class="pngfix">Share on Twitter</a>
+	<a id="digg-icon" href="http://digg.com/submit?url=http://www.6wunderkinder.com/&amp;title=Apps%20That%20Boost%20Your%20Productivity" title="Digg us" class="pngfix">Digg us</a>
+	<a id="stumble-icon" href="http://www.stumbleupon.com/submit?url=http://www.6wunderkinder.com/&amp;title=Apps%20That%20Boost%20Your%20Productivity" title="Stumble us" class="pngfix">Stumble us</a>
+	<a id="delicious-icon" href="http://www.delicious.com/save?jump=close&amp;url=http://www.6wunderkinder.com/&amp;title=Apps%20That%20Boost%20Your%20Productivity" title="Save on del.icio.us" class="pngfix">Save on del.icio.us</a>
+	<a id="email-icon" href="http://www.6wunderkinder.com/share-by-mail.php?url=http://www.6wunderkinder.com/&amp;title=Apps%20That%20Boost%20Your%20Productivity" title="Share this link with a friend" rel="#overlay" class="overlay pngfix">Share this link to a friend</a>
+	<a id="rss-icon" href="http://feeds.feedburner.com/6Wunderkinder" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+</div>
+</body>
+</html>

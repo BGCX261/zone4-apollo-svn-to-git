@@ -1,0 +1,876 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>mbContainers</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+ <link rel="stylesheet" type="text/css" href="css/mbContainer.css" title="style"  media="screen"/>
+  <style type="text/css">
+/*!!! Rightside Dock !!!*/
+#rightsidebar #s_tooltip {
+	 -moz-border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 1px #AAAAAA 1px 1px;
+    background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    white-space: nowrap;
+} 
+#rightsidebar { height: 202px; width: 50px; position: fixed; right: -1px; top: 50%; margin-top: -133px; z-index: 1000; }
+#rightsidebar_1 { height: 250px; width: 33px; position: fixed; right: 120px; top: 50%; margin-top: -48px; z-index: 1000; }
+#rightsidebar a { display: block; overflow: hidden; text-indent: -8793px; height: 67px; width: 50px; border: none; margin-bottom: 0px; margin-right: -17px;}
+#rightsidebar_1 a { display: block; overflow: hidden; text-indent: -8793px; height: 32px; width: 31px; border: none; margin-bottom: 0px; margin-right: -17px; }
+#rightsidebar_1 #facebook-icon { background: url('images/dock.png') repeat scroll 0px -209px transparent;}
+#rightsidebar_1 #twitter-icon { background: url('images/dock.png') repeat scroll 0px -243px transparent; }
+#rightsidebar_1 #delicious-icon { background: url('images/dock.png') repeat scroll 0px -277px transparent; }
+#rightsidebar_1 #digg-icon { background: url('images/dock.png') repeat scroll 0px -311px transparent; }
+#rightsidebar_1 #youtube-icon { background: url('images/dock.png') repeat scroll 0px -344px transparent; }
+#rightsidebar_1 #stumble-icon { background: url('images/dock.png') repeat scroll 0px -378px transparent; }
+#rightsidebar_1 #rss-icon { background: url('images/dock.png') repeat scroll 0px -412px transparent; }
+#rightsidebar #arrange-icon { background: url('images/dock.png') repeat scroll 0px -2px  transparent; }
+#rightsidebar #home-icon { background: url('images/dock.png') repeat scroll 0px -69px transparent;}
+#rightsidebar #email-icon { background: url('images/dock.png') repeat scroll 0px -136px  transparent; }
+.rightsidebar-icon {
+ 	position:absolute;
+ }
+</style>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>-->
+<script type="text/javascript" src="inc/jquery.min.js"></script>
+<script type="text/javascript" src="inc/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="inc/jquery.spasticNav.js"></script>
+<!--  <script type="text/javascript" src="inc/jquery.spastic.js"></script>-->
+<script type="text/javascript" src="inc/jquery.tooltip.js"></script>  
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>-->
+<script type="text/javascript" src="inc/jquery.ui.js"></script>
+<script type="text/javascript" src="inc/jquery.metadata.js"></script>
+<script type="text/javascript" src="inc/mbContainer.js"></script>
+<script type="text/javascript" src="inc/solar_system.js"></script>
+<script type="text/javascript" src="inc/jquery.tagsphere.js"></script>
+<script type="text/javascript" src="inc/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="inc/jquery.mb.mediaEmbedder.js"></script>
+<script type="text/javascript" src="inc/jquery.jcarousel.min.js"></script> 
+<script type="text/javascript" src="inc/jquery.pikachoose.full.js"></script>
+<script type="text/javascript" src="inc/qsort.js"></script> 
+  
+<script type="text/javascript">
+/*!!! Global Variables !!!*/
+var moon_id=1, menu_item, moon_image, num_moons, open_window = new Array(num_moons), total_num_moons, prev_moon_num=0; 
+var image_path, that_image;
+
+/*!!! Build Container Windows !!!*/   
+$(function(){
+	$(".containerPlus").buildContainers({
+  	containment:"document",
+  	elementsPath:"elements/",
+  	onClose:function(o){},
+  	onIconize:function(o){},
+  	effectDuration:200
+	});
+});  
+
+//!!! Planet Menu Setup
+function moons_setup (){
+	total_num_moons=$('#links a').length;
+	if (total_num_moons > num_moons){
+		for (moon_id;moon_id<=total_num_moons;moon_id++){
+			$('#moon'+moon_id).hide();
+		};		
+	}
+};
+
+function setup () {
+	$('.dock_shelf, #center_planet').hide();
+	if ($('#orbit_center').css('display')!== 'none'){
+		$('#orbit_center').hide();
+		$('.point').hide();
+		remove_moons.appendTo($('#y_axis'));
+		remove_moons=undefined;
+	} 
+	moon_id = 1; 
+};
+ 
+function clear_windows () {
+	var iconized;
+	var close;
+	$('.containerPlus').each( function () {
+		iconized=$(this).mb_getState('iconized')
+		close=$(this).mb_getState('closed')
+		var window_width = $(this).attr('width');
+		var window_height = $(this).attr('height');
+		if(close == false && iconized == false){
+	
+			var has_class=$(this).hasClass('createwindow')
+			if (has_class == false){
+				$(this).mb_resizeTo(600, window_width).mb_iconizeclose().mb_resizeTo(600, window_width);			
+			}
+			else {
+				if ($(this).attr('id')=='blog_console'){
+				$(this).mb_close();
+				}
+				else {
+				$(this).mb_close().mb_resizeTo(600, window_width);	
+				}	
+			}
+			if ($(this).mb_getState('collapsed')==true){
+				$(this).containerCollapse();
+			}				
+		}
+	}); 
+};
+
+//!!! Blog list scrolling
+var scrolling = null;  
+function scroll_up() {
+	var d = document.getElementById('list');
+  
+	 d.scrollTop = d.scrollTop - 1;
+  
+	 scrolling = window.setTimeout(function() {
+		  scroll_up();
+	}, 10);
+} 
+function scroll_down() {
+	 var d = document.getElementById('list');
+	 d.scrollTop = d.scrollTop + 1;
+	scrolling = window.setTimeout(function() {
+		  scroll_down();
+	 }, 10);
+}
+function stop_scroll() {
+	 window.clearTimeout(scrolling);
+}
+
+//!!! Tooltip text scrolling animation
+var line=0, start=0, cursor = '&#x2588;',des,timeout,t;
+function text_clear(){
+	if(line==des.length){
+		cursor=' &#x2588;';
+	}
+	document.getElementById('tooltip').innerHTML=des.substring(start,line)+cursor
+	if(line++<des.length){
+		setTimeout("text_clear()",30);
+	} 
+	else {
+		line=0;
+		start=0;
+	}
+}
+
+$(document).ready(function(){
+//!!! Inialize on document ready   
+$('#orbit, #orbit_center, .dock_shelf').hide();
+   $('#nav').spasticNav();   
+	$('a.tooltip').tooltip();
+	$("#pikame").PikaChoose();
+	$('#blog_list').spastic();
+	$('#blog_list a').tool();
+}); 
+$(window).load(function(){
+/*$(document).bind("contextmenu",function(e){
+    	return false;
+	});*/
+//!!! Insert image into image window
+$('#big-panel img').click (function () {
+	var image_clone;
+	image_clone = $(this).clone().removeAttr('style')
+	$('#image_window .mbcontainercontent img').replaceWith(image_clone);
+	$('#image_window').mb_open();
+});
+//!!! Insert embed into player window
+$("#video_page a").click( function () {
+	var video_link;
+	video_link=$(this).attr('video');
+	$('#player_window .mbcontainercontent').html(video_link);
+	$('#player_window').mb_embedMovies();
+	$('#player_window').mb_open();
+});
+
+//!!! Top Navigation
+$("#information_planet, #info_topmenu").click(function(){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() { 
+		num_moons=4;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_4.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				case 2:
+				moon_image = 'images/moon_2.png';
+				open_window[moon_id] = 'blog_page';
+				break;
+				case 3:
+				moon_image = 'images/moon_1.png';
+				open_window[moon_id] = 'gallery_page';
+				break;
+				case 4:
+				moon_image = 'images/moon_3.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/planet_4.png').show();  
+		$('#orbit, #dock_info').fadeIn(); 
+	}, 500);
+	$('#apollo_system').fadeOut('500')
+});
+ 
+$('#blog_planet, #blog_topmenu').click( function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	$('.dock_shelf').hide();
+	setTimeout(function() { 
+		if (typeof remove_moons == 'undefined'){
+			remove_moons=$('#links').detach();
+		}
+		$('#center_planet, #orbit').hide(); 	  
+  		$('#orbit_center, .point, #orbit').fadeIn();
+  		$('#blog_console').mb_open();
+  	}, 500); 	
+  	$('#apollo_system').fadeOut('500');
+}).one('click', function () {
+	var tagsphere = '<ul id="tag_sphere"><li><a href="#" rel="20" title="space">Space</a></li><li><a href="#" rel="15" title="universe">UnIvErSe</a></li><li><a href="#" rel="10" title="dr who">Dr Who</a></li><li><a href="#" rel="5">Star Trek</a></li><li><a href="#" rel="1">Babylon 5</a></li><li><a href="#" rel="5">ZoRRo</a></li></ul>'	
+	$('#orbit_center').append(tagsphere).tagcloud({centrex:166, centrey:166});
+});
+
+$('#media_planet, #media_topmenu').click(function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() {          
+		num_moons=3;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_2.png';
+				open_window[moon_id] = 'gallery_page';
+				break;
+				case 2:
+				moon_image = 'images/moon_4.png';
+				open_window[moon_id] = 'video_page';
+				break;
+				case 3:
+				moon_image = 'images/moon_1.png';
+				open_window[moon_id] = 'press_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/planet_3.png').show();  
+		$('#orbit, #dock_media').fadeIn(); 
+	}, 500);         
+	$('#apollo_system').fadeOut('500')	      
+}); 
+
+$('#about_planet, #about_topmenu').click(function (){
+	clear_windows ();
+	$('#orbit').fadeOut();
+	setTimeout(function() { 
+		num_moons=1;
+		setup();
+			for (moon_id;moon_id<=num_moons;moon_id++){
+			switch (moon_id){
+				case 1:
+				moon_image = 'images/moon_1.png';
+				open_window[moon_id] = 'blog_page';
+				break;
+				};
+			$('#moon'+moon_id+'_img').attr('src', moon_image);
+			$('#moon'+moon_id).show();
+		};
+		moons_setup (); 
+		$('#center_planet').attr('src', 'images/planet_1.png').show();  
+		$('#orbit, #dock_about').fadeIn(); 
+	}, 500);
+	$('#apollo_system').fadeOut('500');
+});  
+
+//!!! Return to Front
+$ ('#home-icon, #apollo_logo').click(function (){
+	clear_windows ();
+	$('#orbit').hide();
+	$('#apollo_system').fadeIn(800);
+});
+///!!! Arrange Windows
+$('#arrange-icon').toggle(function () {
+	var y_count = 100;
+	var close, iconize, collapsed;
+	$('.containerPlus').each( function () {
+		if ($(this).hasClass('alone') == false){
+			iconized=$(this).mb_getState('iconized')
+			close=$(this).mb_getState('closed')
+			if(close == false && iconized == false){
+				collapsed=$(this).mb_getState('collapsed');
+				if (collapsed == false){
+					$(this).containerCollapse().mb_resizeTo(400, 300);
+					$(this).mb_setPosition(y_count,y_count);
+					y_count=y_count+50;
+				}
+			}
+		}
+	});
+	}, function () {
+	var y_count = 100;
+	var x_count = 50;
+	$('.containerPlus').each( function () {
+		if ($(this).hasClass('alone') == false){
+			iconized=$(this).mb_getState('iconized')
+			close=$(this).mb_getState('closed')
+			if(close == false && iconized == false){
+				collapsed=$(this).mb_getState('collapsed');
+				if (collapsed == true){
+					var window_width = $(this).attr('width');
+					$(this).mb_setPosition(y_count,x_count).mb_resizeTo(600, window_width);
+					$(this).containerCollapse();
+					y_count = y_count+100;
+					x_count = x_count + 100;
+				}
+			}
+		}
+	});
+	});		
+});
+</script>
+
+  <script language="Javascript" type="text/javascript">
+$(window).load(function(){
+//!!! Rightside Dock animation
+setTimeout ( function () {
+	$('#digg-icon').animate({'margin-left': '90px'}, 800).next().delay(400).animate({'margin-left': '90px', 'margin-top' : '35px' }, 800).next().delay(400).animate({'margin-left': '98px','margin-top': '70px'}, 800).next().delay(400).animate({'margin-left': '123px','margin-top': '95px'}, 800);
+	$('#digg-icon').prev().delay(400).animate({'margin-left': '90px','margin-top': '-35px'}, 800).prev().delay(400).animate({'margin-left': '98px','margin-top': '-70px'}, 800).prev().delay(400).animate({'margin-left': '123px', 'margin-top' : '-95px'}, 800);
+}, 800);
+$('#digg-icon, #delicious-icon, #youtube-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '75'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '90'}, 200);
+});
+$('#twitter-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '85', 'margin-top' : '-82'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '98', 'margin-top' : '-70'}, 200);
+});
+$('#stumble-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '85', 'margin-top' : '82'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '98', 'margin-top' : '70'}, 200);
+});
+$('#facebook-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '112', 'margin-top' : '-107'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '123', 'margin-top' : '-98'}, 200);
+});
+$('#rss-icon').hover(function() {
+	$(this).stop().animate({'margin-left': '112', 'margin-top' : '107'}, 200);		
+}, function(){
+	$(this).stop().animate({'margin-left': '123', 'margin-top' : '98'}, 200);
+});
+	$("#rightsidebar a, #rightsidebar_1 a").hover(function(e) {
+		var y = $(this).offset().top - $("#rightsidebar").offset().top;
+		var content = $(this).attr('title');
+		var id = $(this).attr('id');
+		$(this).attr('title', '');
+		$("#rightsidebar").append("<div id='s_tooltip'>" + content + "</div>");
+		$("#rightsidebar #s_tooltip").css('opacity', 0.7).css('top', y + 5).css("right", 150).data('trigger', id).fadeIn();
+		},
+			function() {
+			var trigger = $("#rightsidebar #s_tooltip").data('trigger');
+			var content = $("#rightsidebar #s_tooltip").html();
+			$('#' + trigger).attr('title', content);
+			$("#rightsidebar #s_tooltip").remove();
+	});	
+	
+$('#arrange-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -2px'});		
+}, function(){
+	$(this).css({'background-position': '0px -2px'});
+});
+$('#home-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -69px'});		
+}, function(){
+	$(this).css({'background-position': '0px -69px'});
+});
+$('#email-icon').hover(function() {	
+	$(this).css({'background-position': '-50px -136px'});		
+}, function(){
+	$(this).css({'background-position': '0px -136px'});
+});
+
+ $('#dateSort').toggle( function () {	
+ $('.blog_post').fadeIn();
+ $('.blog_post').qsort({attr: 'date', order: 'desc'})
+ },function () {
+ $('.blog_post').fadeIn();
+ $('.blog_post').qsort({attr: 'date'})
+ });
+
+	
+	
+		/* show - hide */
+	
+	    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//!!! Image Gallery Setup
+	var shiftSpeed = 1500;
+
+	var bigSlideWidth = 600;
+	var bigSlideHeight = 400;
+	var smallSlideWidth = 500;
+	var smallSlideHeight = 300;
+	var tinySlideWidth = 400;
+	var tinySlideHeight = 200;
+	var columnCount = 4;
+	var rowCount = 4;
+	
+	function shiftBoxes(boxN) {
+		var col = ( (boxN) % rowCount ) * -1;
+		var row = Math.floor( (boxN) / columnCount ) * -1;
+		$("#big-panel").stop().animate({ left: bigSlideWidth * col, top: bigSlideHeight * row }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#small-panel").stop().animate({ left: smallSlideWidth * col +50, top: smallSlideHeight * row +50 }, shiftSpeed, "easeInOutCubic"  ); 
+		$("#tiny-panel").stop().animate({ left: tinySlideWidth * col +100, top: tinySlideHeight * row +100 }, shiftSpeed, "easeInOutCubic"  ); 
+	}  
+	$("ul#console li a").click( function() { 
+		consoleIndex = $("ul#console li a").index(this);
+		shiftBoxes( consoleIndex  ); 
+	});
+$(function($) {
+	$('div.slide-wrap').each(function() {
+        var oheight = 320;
+        var owidth = 520;
+        var nheight = 140;
+        var nwidth = 340;
+        var top = ((oheight - nheight) / 2);
+        var left = ((owidth - nwidth) / 2);       
+   	$(this).children(0).stop().css({'height':nheight+'px', 'width': nwidth+'px', 'padding-left':'90px','padding-top':'90px' });
+      	$(this).mouseleave(function() {  			
+            $(this).children(0).stop().animate({
+            		  'padding-left':'90px',
+            		  'padding-top':'90px',
+                    'height' : nheight+'px',
+                    'width' : nwidth+'px',
+                    }, 210);     
+        		});
+        $(this).mouseenter(function() {
+            $(this).children(0).stop().animate({
+                   'padding-left':'0px',
+            		  'padding-top':'0px',
+                    'height' : oheight+'px',
+                    'width' : owidth+'px'}, 150, function() {
+                        $(this).css('height', oheight+'px').parent();
+                    });
+        		});
+    		});
+	});
+});
+</script>
+
+</head>
+<body >
+
+<div id="container">
+
+<div id="wrapper">
+<!-- Top Navigation  -->
+<div id="header">
+	<a id="apollo_logo" href="#"><img src="images/apollo_logo_rough.png" height="120px" /></a>
+	<ul id="nav">
+  		<li id="selected"><a href="#" >&nbsp;</a></li>
+  		<li><a id="info_topmenu" href="#">Info</a></li>
+  		<li><a id="blog_topmenu" href="#">Blog</a></li>
+  		<li><a id="media_topmenu" href="#">Media</a></li>
+  		<li><a id="about_topmenu" href="#">About</a></li>
+  		<li><a href="#" >&nbsp;</a></li>      
+	</ul> 
+</div>
+
+<div id="space">
+	<!-- Front Page  -->
+	<ul id="apollo_system" >
+		<li><a id="information_planet" class="tooltip" href="#" style="display:block;" tooltip="HERICUS || INFORMATION Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum scelerisque urna, vitae pretium odio luctus quis. Aenean scelerisque diam eu enim feugiat laoreet. "><img src="images/planet_4.png" width="333px" style="top:230px; left:20px; position: absolute; z-index: 10;" /></a></li>
+		<li><a id="blog_planet" class="tooltip" href="#" style="display:block;" tooltip="ttttttttttttttttttttttttttttt"><img src="images/planet_3.png" width="133px" style="top:10px; left:220px; position: absolute; z-index: 10;" /></a></li>
+		<li><a id="media_planet" class="tooltip" href="#" style="display:block;" tooltip="kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"><img src="images/planet_6.png" width="233px" style="top:200px; left:700px; position: absolute; z-index: 10;" /></a></li>
+		<li><a id="about_planet" class="tooltip" href="#" style="display:block;" tooltip="ilghgjkhgkjjjjjjjjj"><img src="images/planet_1.png" width="80px" style="top:30px; left:900px; position: absolute; z-index: 10;" /></a></li>
+	</ul>
+	<!-- Planet Menu  --> 
+	<div id = "orbit" style="width:718px; height:501px;  background-color: rgba(0,0,0,0.0); margin:auto; z-index:20;">  
+		<div id="dock" class="dock_shelf"> </div><div id="dock_media" class="dock_shelf"> </div><div id="dock_info" class="dock_shelf"> </div><div id="dock_about" class="dock_shelf"> </div>     
+			<div id="orbit_center" style="top:72px; left: 210px">
+				<img id="center_planet_blog" src="images/planet_2.png" width="332px" style="position:absolute; z-index:400;"/>
+			</div>
+		<div id="x_axis">
+   		<div id="y_axis">
+   			<img id="center_planet" src="images/Information_2.png" width="332px" style="position:absolute; top:-166px; left:-166px; z-index:401;"/>
+      		<div id="links">     	
+      			<a id="moon1" onclick="$('#'+open_window[1]).mb_expand();" href="#e?x=250&y=-3&name=jupiter"><img id="moon1_img" src="images/moon_2.png" style="position:absolute;top:-100px;left:-20px;width:3.5em;" /></a>
+    	 			<a id="moon2" onclick="$('#'+open_window[2]).mb_expand();" href="#f?x=-150&y=-163&name=satur"><img id="moon2_img" src="images/moon_1.png" style="position:absolute;top:-20px;left:-20px;width:3em;" /></a>
+      			<a id="moon3" onclick="$('#'+open_window[3]).mb_expand();" href="#g?x=-180&y=223&name=uranus"><img id="moon3_img" src="images/moon_3.png" style="position:absolute;top:-20px;left:-20px;width:2.5em;" /></a>
+      			<a id="moon4" onclick="$('#'+open_window[4]).mb_expand();" href="#g?x=-260&y=43&name=neptune"><img id="moon4_img"src="images/moon_4.png" style="position:absolute;top:-20px;left:-20px;width:1em;" /></a>     
+      		</div>
+  		</div> 
+		</div>   
+	</div>
+</div>
+<!-- Image Gallery Window  -->
+<div id="gallery_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'browser.png', skin:'white', width:'800', height:'600', iconized:'true', dock:'dock_media', title:'Image Archives'}" style="position:fixed;top:150px;left:400px">
+  
+<div id="viewport">
+
+	<div id="enclosure">
+
+		<div id="tiny-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+		</div> 
+	
+		<div id="small-panel">
+			<div class="slide-wrap"><p>one</p></div> 
+			<div class="slide-wrap"><p>two</p></div> 
+			<div class="slide-wrap"><p>three</p></div> 
+			<div class="slide-wrap"><p>four</p></div> 
+			<div class="slide-wrap"><p>five</p></div> 
+			<div class="slide-wrap"><p>six</p></div> 
+			<div class="slide-wrap"><p>seven</p></div> 
+			<div class="slide-wrap"><p>eight</p></div> 
+			<div class="slide-wrap"><p>nine</p></div>
+			<div class="slide-wrap"><p>ten</p></div>
+			<div class="slide-wrap"><p>eleven</p></div>
+			<div class="slide-wrap"><p>twelve</p></div>
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div> 
+			<div class="slide-wrap"><p>twelve</p></div>   
+		</div> 
+
+		<div id="big-panel">
+			<div class="slide-wrap"><img src="gallery/Armfeb (18).jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/Armfeb (4).jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="gallery/Armfeb (6).jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/Armfeb (16).jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/David Melanie Peter.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/editd nycc launch 181.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/edited nycc launch 176.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/edited nycc launch 192.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/edited nycc launch 193.jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="gallery/edited nycc launch 194.jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="gallery/edited nycc launch 196.jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="gallery/Melanie Peter.jpg" width="100%" height="100%" /></div>
+			<div class="slide-wrap"><img src="gallery/Melanie Peter David 1.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/Peter David Melanie.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/Peter Melanie David 2.jpg" width="100%" height="100%" /></div> 
+			<div class="slide-wrap"><img src="gallery/Peter Melanie David 2.jpg" width="100%" height="100%" /></div> 
+		</div> 
+	</div>  
+	<div>
+	<ul id="console">
+		<li><a href="#1"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#2"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#3"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#4"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#5"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#6"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#7"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#8"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#9"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#10"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#11"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#12"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#13"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#14"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#15"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+		<li><a href="#16"><img src="images/overlay.png" width="35px" height="35px"/></a></li>
+	</ul>
+   </div>
+</div>
+
+</div>
+<!-- Image viewer Window  -->  
+<div id="image_window" class="containerPlus draggable resizable media createwindow {buttons:'f,m,c', icon:'moonov_04.png', skin:'white', width:'850', height:'600', iconized:'false', closed:'true', title:'Image'}" style="position:fixed;top:100px;left:200px;">  
+
+	<img id="#image" src="images/Apollo_layout_1920x1080.jpg" width="100%" height="100%" />
+  
+</div>  
+<!-- Video embed window  -->
+<div id="player_window" class="containerPlus draggable resizable media createwindow {buttons:'f,m,c', icon:'moonov_03.png', skin:'white', width:'800', height:'600', iconized:'false', closed:'true', title:'Video'}" style="position:fixed;top:200px;left:400px;">  
+
+  
+</div>  
+<!-- Video Gallery Window -->
+<div id="video_page" class="containerPlus draggable resizable media {buttons:'m,i', icon:'moonov_03.png', skin:'white', width:'400', height:'600', dock:'dock_media',iconized:'true', title:'Recordings'}" style="position:fixed;top:200px;left:200px">  
+
+	<div class="float">
+  	<a href="#" video="[youtube=http://www.youtube.com/watch?v=1fLCbw27F-8]"><img src="images/thumb_awards.jpg" width="150" height="100"
+  	alt="image 1" /><br />
+  	<p>caption 1</p>
+  	</a>
+	</div>
+
+	<div class="float">
+ 	<a href="#" video="[youtube=http://www.youtube.com/watch?v=n3jfbAcsfX8]"><img src="images/thumb_robo.jpg" width="150" height="100"
+  	alt="image 2" /><br />
+  	<p>caption 2</p>
+  	</a>
+	</div>
+
+	<div class="float">
+  	<img src="images/moon_3.png" width="100" height="100"
+  	alt="image 3" /><br />
+  	<p>caption 3</p>
+	</div>
+
+	<div class="float">
+  	<img src="images/moon_6.png" width="100" height="100"
+  	alt="image 3" /><br />
+  	<p>caption 3</p>
+	</div>
+
+	<div class="float">
+  	<img src="images/moon_1.png" width="100" height="100"
+  	alt="image 3" /><br />
+  	<p>caption 3</p>
+	</div>
+
+	<div class="float">
+  	<img src="image3.gif" width="100" height="100"
+  	alt="image 3" /><br />
+  	<p>caption 3</p>
+	</div>
+
+	<div class="float">
+  	<img src="image3.gif" width="100" height="100"
+  	alt="image 3" /><br />
+  	<p>caption 3</p>
+	</div>
+
+</div>  
+
+<div id="press_page" class="containerPlus draggable resizable media {buttons:'f,m,i', icon:'moonov_01.png', skin:'white', width:'800', height:'600',dock:'dock_media',iconized:'true', title:'Media Release'}" style="position:fixed;top:150px;left:400px">  
+
+	<div class="blog_header">
+		<h1><a href="#">Title</a></h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+	</div>
+	<div class="blog_wrapper">
+		<div class="main">
+			<h2>M E D I A   R E L E A S E</h2>
+			<p>
+			
+FOR IMMEDIATE RELEASE
+October 10, 2010 – New York Comic Con, New York, NY
+
+NEW YORK HOSTS THE LAUNCH FOR AUSTRALIA BASED GLOBAL FILM & TELEVISION AWARDS SHOW
+
+Australian company 101010 Productions launch ‘The Apollo Awards for Science Fiction and Fantasy Film and Television’ at New York Comic Con.
+
+101010 Productions have partnered with Australia’s award winning production and web entertainment companies TPD Media and Zone4 to introduce a worldwide Film and Television award ceremony unique to the internet.
+
+Battlestar Galactica alumnus, actor Richard Hatch is assisting with the promotion of the media launch of The Apollo Awards at New York Comic Con at the Jacob K. Javits Center, taking place on October 10. This date in binary code, 101010, equals the number 42, known throughout the genre as ‘the meaning of life, the universe and everything’ from the international best seller ‘The Hitch Hikers Guide to the Galaxy’ by Douglas Adams. At New York Comic Con, The Apollo Awards team make their official public announcement of the event, and unveil the trophy design and major details of the 2011 awards ceremony.
+
+The Apollo Awards are so named for the Greek and Roman god Apollo. Son of Zeus, Apollo was one of the most significant and influential gods of ancient Greek and Roman mythology. Over the decades, Apollo has appeared in science fiction and fantasy film and television both as the God and also by name, in series such as Star Trek, Battlestar Galactica, Stargate, to cult fantasy adventure shows Xena: Warrior Princess and Hercules: The Legendary Journeys. The realms of mythology, science and science fiction merged when the first NASA moon landing missions were codenamed 'Apollo'.
+
+In the many Film and Television awards given out annually, science fiction and fantasy has never experienced the recognition they deserve, say the creators of the Apollo Awards. 
+
+Peter Budd, Director of 101010 Productions said, “What makes The Apollo Awards unique is that the choice is truly and firmly in the hands of the worldwide audience. From the Americas and Europe to Africa, Asia and Oceania, both nominations and votes are in the hands of the people”. 
+
+For this global alliance of fans, The Apollo Awards will be delivered online, live and worldwide, rather than through broadcast or cable TV.  
+
+Co-creator of the Apollo Awards, Melanie Teychenne-King says, “The internet is the future of television, of breaking down the barriers between regions and time zones. By streaming the award ceremony live across the globe we’re giving everyone the chance to participate on an even level, to know they have ownership of the show.” 
+
+The purpose of 101010 Productions, owners and creators of The Apollo Awards, is to unite the worldwide community of science fiction and fantasy audiences and in doing so, create opportunities for the global creative community in developing and producing projects in these genres. 
+
+The first teaser trailer for the Apollo Awards is available on YouTube at 
+http://www.youtube.com/TheApolloAwards
+
+Information regarding international business alliances and sponsors will be forthcoming. No further public announcements will be made until November 23rd - the birth date of Boris Karloff, made famous by his roles in the 1930’s Frankenstein films.  
+
+Media enquiries only can be directed to media@101010productions.com
+
+***
+
+
+
+
+INFORMATION AND BIOGRAPHIES
+
+THE APOLLO AWARDS WEBCAST	
+The Apollo Awards Ceremony is a gala red-carpet event to be staged in Queensland, Australia in mid-2011. Utilising ‘state-of-the-art’ integration technologies, live presentations and performances will be combined with pre-produced entertainment segments and acceptances. The Apollo Awards will employ the classic award categories of Best Actor, Best Film, and Best Series etcetera, as well as irreverent categories.
+
+NEW YORK COMIC CON 					
+The New York Comic Con is an annual New York City convention dedicated to comics, graphic novels, anime, video games, toys, movies, and television. Now in its fifth year, The New York Comic Con is a for-profit event produced and managed by ReedPOP, a division of Reed Business. 
+
+RICHARD HATCH
+Best known for his role as Apollo in the classic 1978 Battlestar Galactica and as Tom Zarek in the 2004 Syfy re-imagining of the same series, Richard is an accomplished author, director and producer, as well as an acting and life coach.  He is currently co-creating and starring several web series (WhoTheFrak.com and The Hunted: Vindication).
+
+101010 PRODUCTIONS					
+Peter Budd and Melanie Teychenne-King, Directors of 101010 Productions Pty. Ltd. and independent Event Managers, founded the company to specialise in the creation and delivery of unique, world-class events for the entertainment media in Science Fiction and Fantasy sector.
+
+Both have worked on numerous large scale entertainment events around Australia, coordinating logistics and operations, as well as managing notable actors from series and films such as the Star Trek and Stargate franchises, Doctor Who, Buffy The Vampire Slayer, Star Wars, Lord of the Rings and the Harry Potter franchise.
+
+Senior Development Manager of 101010 Productions, David Franken is a former 25 year programmer at the Seven Network Australia, a lifelong science fiction and fantasy enthusiast and currently a television production consultant and screen writer.  
+
+T.P.D. MEDIA							
+TPD Media has the largest media output of the state of Queensland, Australia. The company offers a synergy of technology and talent through its in-house, high definition technology, award-winning crews, and a team of video-graphic designers working in 2D and 3D animation. 
+
+ZONE 4 							
+ZONE4 is a Digital Content Company, founded by EMMY and BAFTA award winning Thom Saunders. It has successfully delivered over 700 projects across multiple digital platforms, including the global campaign for the TV show LOST with ABC America.
+
+###
+ENDS
+</p>
+
+		</div>
+		<div class="main">
+			<h2><a href="#">Subtitle</a></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+		</div>
+	</div>
+	<div class="blog_footer">
+		<h2><a href="#">Footer</a></h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+	</div>
+</div>
+
+<!-- Blog Window-->
+<div id="blog_console" class="containerPlus draggable media createwindow alone {buttons:'m', skin:'white', width:'340', height:'416', title:'&nbsp;&nbsp;&nbsp;Log', iconized:'false', closed:'true', alwaysOnTop:'true'}" style="position:fixed;top:127px;left:0px; ">  
+
+	<div id="blog_wrap">
+		<div align="right" style="font: 14px rockwell;padding-bottom:10px;"> <span style="background-color:#96bfe5;padding:3px;"><a id="dateSort" href="#">Refresh</a></span></div>
+		<div class="pikachoose">
+			<ul id="pikame">
+ 				<li><a href="#"><img src="images/circle.png" ref="images/1.jpg"></a><span><a href="#">What to do when the Force fails</a></span></li>
+ 				<li><a href="#"><img src="images/circle.png" ref="images/2.jpg"></a><span><a href="#">Klingon in 10 easy steps</a></span></li>
+ 				<li><a href="#"><img src="images/circle.png" ref="images/3.jpg"></a><span><a href="#">Why Ewoks will rule the galaxy</a></span></li>
+ 				<li><a href="#"><img src="images/circle.png" ref="images/4.jpg"></a><span><a href="#">How to make sure your TV show isn't pulled</a></span></li>
+ 			</ul>
+  		</div>
+		<div id="list" style="background:rgba(0,0,0,0.9); border: #96bfe5 solid 1px; height: 100px;border-bottom:none;margin-top:5px; overflow:hidden;">
+			<ul id="blog_list">
+				<li class="blog_post" id="selected1" date="2" tag="space"><a href="#" tooltip="hellllooooo  test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh" onclick="$('#blog_post_1').mb_open()">How to tell if you're a Cylon</a></li>
+				<li class="blog_post" date="3" tag="dr who"><a tooltip="TEST2 test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh" href="#" onclick="$('#blog_post_2').mb_open()">Why Daleks Make Great Pets</a></li>
+				<li class="blog_post" date="1" tag="space"><a tooltip="Jellllooooo  test kjnv  gb fh jdhj dfhj dh jdf jd hj dh jd hj dh j gh jd ghj dgh j ghj gfhj gh" href="#" >The End of the Universe</a></li>
+				<li class="blog_post" date="1" tag="universe"><a href="#" >The End of the Universe</a></li>
+				<li class="blog_post" date="1" tag="dr who"><a href="#" >The End of the Universe</a></li>
+				<li class="blog_post" date="1" tag="universe"><a href="#" >The End of the Universe</a></li>
+				<li class="blog_post" date="1" tag="dr who"><a href="#" >The End of the Universe</a></li>
+			</ul>
+  		</div>
+		<div align="center" style=" height: 30px; border: #96bfe5 solid 1px;font-size:1.9em;">
+			<a href="#" onmouseover="scroll_down();" onmouseout="stop_scroll();">&#9660;</a>
+			<span style="margin-left:0px">&nbsp;&nbsp;&nbsp;</span>
+			<a href="#" onmouseover="scroll_up();" onmouseout="stop_scroll();" >&#9650;</a>
+		</div>
+	</div>  
+</div>
+ 
+<div id="blog_post_1" class="containerPlus draggable resizable media createwindow scroller blogpost{buttons:'f,m,c', icon:'moonov_03.png', skin:'white', width:'800', height:'600',iconized:'false', closed:'true', title:'Title 1'}" style="position:fixed;top:50px;left:450px;">  
+	<div class="blog_header">
+		<h1><a href="#">Title</a></h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+	</div>
+	<div class="blog_wrapper">
+		<div class="main">
+			<h2><a href="#" onclick="$('#blog_post_2').mb_open()">Subtitle</a></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+		</div>
+		<div class="main">
+			<h2><a href="#">Subtitle</a></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+		</div>
+	</div>
+	<div class="blog_footer">
+		<h2><a href="#">Footer</a></h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+	</div>
+</div>   
+
+<div id="blog_post_2" class="containerPlus draggable resizable media createwindow scroller blogpost{buttons:'f,m,c', icon:'moonov_03.png', skin:'white', width:'800', height:'600',iconized:'false', closed:'true', title:'Title 1'}" style="position:fixed;top:100px;left:550px;">  
+	<div class="blog_header">
+		<h1><a href="#">Title</a></h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+	</div>
+	<div class="blog_wrapper">
+		<div class="main">
+			<h2><a href="#">Subtitle</a></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+		</div>
+		<div class="main">
+			<h2><a href="#">Subtitle</a></h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in. Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros.</p>
+			<p>Nulla scelerisque diam eget sapien sollicitudin accumsan. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed cursus pharetra mauris a mattis. Morbi gravida velit nec lectus semper vitae porta sapien semper. Sed blandit tempus tristique. Aenean libero enim, gravida eget egestas et, dapibus in odio. Aenean nisl nunc, ornare porttitor aliquam non, lacinia in leo. Cras viverra mi in justo ultrices ac mattis mi imperdiet. Proin at rhoncus libero. Mauris quis urna eros, dapibus porta lectus.</p>
+		</div>
+	</div>
+	<div class="blog_footer">
+		<h2><a href="#">Footer</a></h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis facilisis viverra. Curabitur luctus, nibh ac rhoncus ultrices, turpis mauris mattis dui, quis pharetra odio orci vitae risus. Nunc ultricies gravida facilisis. Pellentesque ante mauris, blandit id condimentum non, tristique non urna. Integer nec erat eros. Curabitur ullamcorper semper est, ut egestas est bibendum in.</p>
+	</div>
+</div>   
+    
+ <!-- 
+  <div id="footer">
+
+</div>
+ --> 
+</div>
+</div>
+
+<div id="rightsidebar_1">
+	<a id="facebook-icon" class="rightsidebar-icon" href="#" title="Share us on Facebook" class="pngfix">Share on Facebook</a>
+	<a id="twitter-icon" class="rightsidebar-icon" href="#" title="Share us on Twitter" class="pngfix">Share on Twitter</a>
+	<a id="delicious-icon" class="rightsidebar-icon"  href="#" title="Save on del.icio.us" class="pngfix">Save on del.icio.us</a>
+	<a id="digg-icon" class="fourth rightsidebar-icon" href="#" title="Digg us" class="pngfix">Digg us</a>
+	<a id="youtube-icon" class="rightsidebar-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+	<a id="stumble-icon" class="rightsidebar-icon" href="#" title="Stumble us" class="pngfix">Stumble us</a>
+	<a id="rss-icon" class="rightsidebar-icon" href="#" title="Get our RSS Feed" class="pngfix">Get our RSS Feed</a>
+</div>
+
+<div id="rightsidebar">
+	<a id="arrange-icon"  href="#" title="You click here to arrange your windows in multiple ways." href="#" class="overlay pngfix">Share this link to a friend</a>
+	<a id="home-icon"  href="#" title="You click here to return to front page." href="#" class="overlay pngfix">Share this link to a friend</a>
+	<a id="email-icon"  href="#" title="You click here to contact us." href="#" class="overlay pngfix">Share this link to a friend</a>
+</div>
+</body>
+</html>
